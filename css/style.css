@@ -1,14 +1,15 @@
 /* Variables de tema */
 :root {
-    --bg-color: #1e1e2f;
-    --text-color: #ffffff;
-    --card-bg: #29293d;
-    --hover-bg: #845ec2;
-    --light-bg-color: #ffffff;
-    --light-text-color: #000000;
-    --light-card-bg: #f4f4f4;
-    --light-hover-bg: #673ab7;
-    --star-color: rgba(255, 255, 255, 0.8);
+    --bg-color: #1e1e2f;         /* fondo */
+    --text-color: #ffffff;       /* encabezados */
+    --card-bg: rgb(41, 41, 61);  /* div o separadores */
+    --hover-bg: #8f50f5c0;       /* botones */
+
+    --light-bg-color: #ffffff;   /* fondo ligth */
+    --light-text-color: #000000; /* encabezados ligth */
+    --light-card-bg: #f4f4f4;    /* div o separadores */
+    --light-hover-bg: #b3b3b3;   /* botones ligth*/
+    --star-color: rgba(255, 255, 255, 0.8); /* estrellas */
   }
   
   /* Tema claro */
@@ -17,8 +18,8 @@
     --text-color: var(--light-text-color);
     --card-bg: var(--light-card-bg);
     --hover-bg: var(--light-hover-bg);
-    --tag--text-color: var(--dark-text-color);
-    --star-color: rgba(0, 0, 0, 0.8);
+    --tag--text-color: var(--text-color);
+    --star-color: rgba(0, 0, 0, 0.8); /*/color estrella*/
   }
   
   /* Estilos generales */
@@ -39,6 +40,7 @@
   .container {
     margin-top: 20vh;
     text-align: center;
+    margin-bottom: 20vh;
   }
   
   /* Gradiente de texto para el título */
@@ -47,6 +49,7 @@
     background: linear-gradient(90deg, #ff6b6b, #845ec2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin: 0;
   }
   
   h2 {
@@ -59,17 +62,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px;
     background-color: var(--card-bg);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
   }
   
   .navbar h1 {
     font-size: 1.5rem;
   }
   
-  /* Botones */
-  .button, .theme-toggle {
+  /* Botones cv ,contacto*/
+  .button{
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -132,11 +139,12 @@
   }
   
   .tag {
-    background-color: #ffffff;
-    color: black;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 0.9rem;
+    font-family: cursive;
   }
   
   .tag:hover {
@@ -172,3 +180,101 @@
       opacity: 0;
     }
   }
+
+  /* menu desplegable*/
+/* Barra de navegación */
+
+
+.theme-toggle,
+.menu-toggle {
+  display: inline-block;
+  text-align: start;
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  background-color: var(--hover-bg);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover,
+.menu-toggle:hover {
+  background-color: #673ab7;
+}
+
+.theme-toggle:focus,
+.menu-toggle:focus {
+  outline: 2px solid #845ec2;
+  outline-offset: 4px;
+}
+
+/* Menú deslizante */
+.menu-slideout {
+  position: fixed;
+  top: 0;
+  right: -350px; /* Oculto inicialmente */
+  width: 300px;
+  height: 100%;
+  background-color: var(--card-bg);
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease;
+  z-index: 15;
+  padding: 20px;
+}
+
+.menu-slideout ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  padding-top: 60px;
+}
+
+.menu-slideout li {
+  margin-bottom: 100px;
+}
+
+.menu-slideout li a {
+  text-decoration: none;
+  color: var(--text-color); /*texto en menu desplegable*/
+  font-size: 1.2rem;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+  font-family: cursive;
+}
+
+.menu-slideout li a:hover {
+  color: #845ec2;
+  font-weight: bold;
+}
+
+.menu-slideout li a:hover {
+  color: #845ec2;
+}
+
+/* Activo (mostrar menú) */
+.menu-slideout.active {
+  right: 0;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .menu-slideout {
+    width: 100%; /* Ocupa toda la pantalla en dispositivos pequeños */
+  }
+}
+
+.menu-slideout img{
+  padding-top: 60px;
+  width: 200px; /* Ajusta el ancho de la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Hace la imagen circular, si es cuadrada */
+  margin: 20px auto; /* Agrega espacio alrededor y centra horizontalmente */
+  display: block; /* Asegura que el margen automático funcione para centrar */
+}

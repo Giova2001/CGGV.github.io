@@ -1,4 +1,4 @@
-// Tema claro/oscuro
+// Alternar tema claro/oscuro
 const themeToggle = document.getElementById("themeToggle");
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("light-theme");
@@ -38,3 +38,12 @@ function createStar() {
 
 // Crear estrellas continuamente
 setInterval(createStar, 100);
+
+// Menú deslizante
+const menuToggle = document.getElementById("menuToggle");
+const menuSlideout = document.getElementById("menuSlideout");
+
+// Alternar el menú
+menuToggle.addEventListener("click", () => {
+  menuSlideout.classList.toggle("active");
+});
