@@ -12,7 +12,7 @@
     --star-color: rgba(255, 255, 255, 0.8); /* estrellas */
   }
   
-  /* Tema claro */
+  /* Tema claro main*/
   .light-theme {
     --bg-color: var(--light-bg-color);
     --text-color: var(--light-text-color);
@@ -21,6 +21,31 @@
     --tag--text-color: var(--text-color);
     --star-color: rgba(0, 0, 0, 0.8); /*/color estrella*/
   }
+
+  
+/*tema ligth contact________________*/
+.contact-form input, 
+.contact-form textarea {
+    background-color: var(--light-hover-bg);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+}
+
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-form button {
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+}
+
+.contact-form button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*_________________________________*/
   
   /* Estilos generales */
   body {
@@ -31,7 +56,7 @@
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
+
   h1, h2, p {
     margin: 0;
     text-align: center;
@@ -183,8 +208,6 @@
 
   /* menu desplegable*/
 /* Barra de navegación */
-
-
 .theme-toggle,
 .menu-toggle {
   display: inline-block;
@@ -215,14 +238,22 @@
 .menu-slideout {
   position: fixed;
   top: 0;
-  right: -350px; /* Oculto inicialmente */
-  width: 300px;
+  right: -150%; /* Oculto inicialmente */
+  width: 40%;
   height: 100%;
   background-color: var(--card-bg);
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
-  z-index: 15;
-  padding: 20px;
+  z-index: 999;
+}
+
+.menu-slideout img{
+  padding-top: 60px;
+  width: 200px; /* Ajusta el ancho de la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Hace la imagen circular, si es cuadrada */
+  margin: 20px auto; /* Agrega espacio alrededor y centra horizontalmente */
+  display: block; /* Asegura que el margen automático funcione para centrar */
 }
 
 .menu-slideout ul {
@@ -259,22 +290,115 @@
   right: 0;
 }
 
+/*contact*/
+.contact-card img {
+  width: 100px; /* Ajusta el tamaño según lo necesario */
+  height: 100px;
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: cover; /* Asegura que la imagen no se deforme */
+  margin: 0 auto 20px auto; /* Centra la imagen y agrega espacio inferior */
+  display: block; /* Garantiza que se mantenga alineada */
+}
+
+/* Sección de contacto */
+.contact-section {
+  position: relative;
+  margin-top: 80px; /* Altura del navbar */
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.contact-card {
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  padding: 20px;
+  display: inline-block;
+  text-align: left;
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contact-item {
+  margin: 10px 0;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ff9900;
+}
+
+/* Formulario de contacto */
+.contact-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  width: 75%;
+  max-width: 500px;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--star-color);
+  color: var(--light-text-color);/*color al escribir en la caja*/
+  font-size: 16px;
+}
+
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+  color: var(--bg-color);
+}
+
+.contact-form button {
+  background-color: #ff9900;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+  background-color: #cc7a00;
+  transform: translateY(-2px);
+}
+/*__________________________*/
+
 @media (max-width: 600px) {
   .navbar {
+    position: fixed;
     flex-direction: column;
+    align-items: center;
     padding: 10px;
+    gap: 10px;
   }
 
   .menu-slideout {
-    width: 100%; /* Ocupa toda la pantalla en dispositivos pequeños */
+    width: 90%; /* Ocupa toda la pantalla en dispositivos pequeños */
   }
+
+  .contact-card {
+    width: 90%;
 }
 
-.menu-slideout img{
-  padding-top: 60px;
-  width: 200px; /* Ajusta el ancho de la imagen */
-  height: auto; /* Mantiene la proporción de la imagen */
-  border-radius: 50%; /* Hace la imagen circular, si es cuadrada */
-  margin: 20px auto; /* Agrega espacio alrededor y centra horizontalmente */
-  display: block; /* Asegura que el margen automático funcione para centrar */
+.contact-form input, 
+.contact-form textarea {
+    width: 90%;
+}
+
+
 }

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/styleContact.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -27,6 +28,38 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
+
+  <!-- Contenido de contactame -->
+  <div class="contact-section">
+    <h1>Contáctame</h1>
+    <div class="contact-card">
+      <img src="image/persona.png" alt="User Icon" class="icon">
+      <div class="info-box">
+          <div class="input-box">
+              Correo@gmail.com
+              <button class="copy-button">
+                  📋
+                  <span class="tooltip">copiar</span>
+              </button>
+          </div>
+          <div class="input-box">teléfono</div>
+      </div>
+        <div class="contact-item social-icons">
+            Conéctate: 
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">Github</a>
+        </div>
+    </div>
+    <div class="contact-form">
+        <h2>Enviar Mensaje</h2>
+        <form>
+            <input type="text" placeholder="Nombre" required>
+            <input type="email" placeholder="Correo Electrónico" required>
+            <textarea rows="2" placeholder="Mensaje" required></textarea>
+        </form>
+        <button type="submit">Enviar</button>
+    </div>
+</div>
 
   <!-- Fondo animado de estrellas -->
   <div class="stars" id="stars"></div>
