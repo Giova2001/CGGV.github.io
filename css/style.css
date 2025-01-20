@@ -22,7 +22,6 @@
     --star-color: rgba(0, 0, 0, 0.8); /*/color estrella*/
   }
 
-  
 /*tema ligth contact________________*/
 .contact-form input, 
 .contact-form textarea {
@@ -377,28 +376,3 @@
   transform: translateY(-2px);
 }
 /*__________________________*/
-
-@media (max-width: 600px) {
-  .navbar {
-    position: fixed;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .menu-slideout {
-    width: 90%; /* Ocupa toda la pantalla en dispositivos pequeños */
-  }
-
-  .contact-card {
-    width: 90%;
-}
-
-.contact-form input, 
-.contact-form textarea {
-    width: 90%;
-}
-
-
-}
