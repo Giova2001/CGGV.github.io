@@ -24,3 +24,5 @@ export function closeMenu() {
     menuSlideout.classList.remove('active');
   }
 }
+
+window.closeMenu = closeMenu;
