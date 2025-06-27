@@ -1,88 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christopher Giovanni Garcia Vasquez</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/styleMobil.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christopher Giovanni Garcia Vasquez</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/resposive.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
   <!-- Navbar -->
   <div class="navbar">
     <h1>Portfolio</h1>
     <div>
       <button class="theme-toggle" id="themeToggle">Modo oscuro</button>
-      <button class="menu-toggle" id="menuToggle">Menú</button></div>
+      <button class="menu-toggle" id="menuToggle">Menú</button>
+    </div>
   </div>
 
   <!-- Menú deslizante -->
   <div class="menu-slideout" id="menuSlideout">
-    
+    <button class="close-button" onclick="cerrarMenu()">✖</button>
     <img src="image/yo.jpg" alt="yo">
-  
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Proyect</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+    <nav>
+      <li><a href="#" data-target="home.html">Inicio</a></li>
+      <li><a href="#" data-target="about.html">About</a></li>
+      <li><a href="#" data-target="projects.html">Projects</a></li>
+      <li><a href="#" data-target="contact.html">Contact</a></li>
+    </nav>
   </div>
+
   <!-- Contenedor de estrellas -->
   <div class="stars" id="stars"></div>
 
-    <div class="container">
-        <p>Hi 👋, I'm</p>
-        <h1>Giovanni Garcia</h1>
-        <h2>Developer, passionate about web, mobile y deskto development.</h2>
-        <div class="button-container">
-          <a href="#" class="button">
-            Download CV
-            <span class="icon">📥</span>
-          </a>
-          <a href="#" class="button">
-            Contact me
-            <span class="icon">✉️</span>
-          </a>
-        </div>
-      </div>
-
-  <!-- Skills Section -->
-  <div class="skills-container">
-    <!-- Frontend -->
-    <div class="skill-category">
-      <img src="https://cdn-icons-png.flaticon.com/512/2965/2965278.png" alt="Frontend Icon">
-      <h3>Frontend</h3>
-      <div class="tags">
-        <span class="tag">HTML5</span>
-        <span class="tag">CSS</span>
-        <span class="tag">JavaScript</span>
-      </div>
-    </div>
-
-    <!-- Backend -->
-    <div class="skill-category">
-      <img src="https://cdn-icons-png.flaticon.com/512/2857/2857482.png" alt="Backend Icon">
-      <h3>Backend</h3>
-      <div class="tags">
-        <span class="tag">Java</span>
-        <span class="tag">NodeJS</span>
-        <span class="tag">MySQL</span>
-        <span class="tag">MongoDB</span>
-      </div>
-    </div>
-
-    <!-- Herramientas -->
-    <div class="skill-category">
-      <img src="https://cdn-icons-png.flaticon.com/512/1149/1149204.png" alt="Tools Icon">
-      <h3>Herramientas</h3>
-      <div class="tags">
-        <span class="tag">GitHub</span>
-        <span class="tag">Scrum</span>
-      </div>
-    </div>
+  <!-- Contenedor principal de contenido -->
+  <div id="main-content">
+    <!-- El contenido se cargará aquí dinámicamente -->
   </div>
 
-  <script src="js/javascript.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/contentLoader.js"></script>
 </body>
 </html>

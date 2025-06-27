@@ -1,378 +1,167 @@
-/* Variables de tema */
+/* === style.css (Estilos generales) === */
 :root {
-    --bg-color: #1e1e2f;         /* fondo */
-    --text-color: #ffffff;       /* encabezados */
-    --card-bg: rgb(41, 41, 61);  /* div o separadores */
-    --hover-bg: #8f50f5c0;       /* botones */
-
-    --light-bg-color: #ffffff;   /* fondo ligth */
-    --light-text-color: #000000; /* encabezados ligth */
-    --light-card-bg: #f4f4f4;    /* div o separadores */
-    --light-hover-bg: #b3b3b3;   /* botones ligth*/
-    --star-color: rgba(255, 255, 255, 0.8); /* estrellas */
-  }
-  
-  /* Tema claro main*/
-  .light-theme {
-    --bg-color: var(--light-bg-color);
-    --text-color: var(--light-text-color);
-    --card-bg: var(--light-card-bg);
-    --hover-bg: var(--light-hover-bg);
-    --tag--text-color: var(--text-color);
-    --star-color: rgba(0, 0, 0, 0.8); /*/color estrella*/
-  }
-
-/*tema ligth contact________________*/
-.contact-form input, 
-.contact-form textarea {
-    background-color: var(--light-hover-bg);
-    color: var(--text-color);
-    border: 1px solid var(--text-color);
+  --bg-color: #1e1e2f;
+  --text-color: #ffffff;
+  --card-bg: rgb(41, 41, 61);
+  --hover-bg: #8f50f5c0;
+  --light-bg-color: #ffffff;
+  --light-text-color: #000000;
+  --light-card-bg: #f4f4f4;
+  --light-hover-bg: #b3b3b3;
+  --star-color: rgba(255, 255, 255, 0.8);
 }
 
-.contact-form input::placeholder, 
-.contact-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+.light-theme {
+  --bg-color: var(--light-bg-color);
+  --text-color: var(--light-text-color);
+  --card-bg: var(--light-card-bg);
+  --hover-bg: var(--light-hover-bg);
+  --star-color: rgba(0, 0, 0, 0.8);
 }
 
-.contact-form button {
-    background-color: var(--hover-bg);
-    color: var(--text-color);
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.contact-form button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+
+/*animacion de brillo en las letras/*/
+.navbar h1{
+  font-size: 2rem;
+  margin: 10px 0;
+  background: linear-gradient(
+    90deg,
+    #ff6b6b 0%,
+    #845ec2 25%,
+    #ff6b6b 50%,
+    #845ec2 75%,
+    #ff6b6b 100%
+  );
+  background-size: 300% auto; /* más ancho para hacer la transición más suave */
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineGradient 6s ease-in-out infinite;
 }
 
-/*_________________________________*/
-  
-  /* Estilos generales */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+@keyframes shineGradient {
+  0% {
+    background-position: 0% center;
   }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
 
-  h1, h2, p {
-    margin: 0;
-    text-align: center;
-  }
-  
-  .container {
-    margin-top: 20vh;
-    text-align: center;
-    margin-bottom: 20vh;
-  }
-  
-  /* Gradiente de texto para el título */
-  h1 {
-    font-size: 3rem;
-    background: linear-gradient(90deg, #ff6b6b, #845ec2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    margin: 10px 0 20px;
-    color: var(--text-color);
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: var(--card-bg);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  .navbar h1 {
-    font-size: 1.5rem;
-  }
-  
-  /* Botones cv ,contacto*/
-  .button{
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    text-decoration: none;
-    color: var(--text-color);
-    background-color: var(--hover-bg);
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover, .theme-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .icon {
-    margin-left: 5px;
-  }
-  
-  /* Skills Section */
-  .skills-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin: 50px auto;
-    max-width: 800px;
-  }
-  
-  .skill-category {
-    background-color: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-  }
-  
-  .skill-category img {
-    width: 50px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .skill-category h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .tag {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    font-family: cursive;
-  }
-  
-  .tag:hover {
-    background-color: var(--hover-bg);
-  }
-  
-  /* Fondo animado de estrellas */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-  }
-  
-  .star {
-    position: absolute;
-    background-color: var(--star-color); /* Usa la variable para el color */
-    border-radius: 50%;
-    animation: fall linear infinite;
-    box-shadow: 0 0 5px var(--star-color);
-  }
-  
-  @keyframes fall {
-    0% {
-      transform: translateY(-100px);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh);
-      opacity: 0;
-    }
-  }
+h1, h2, p {
+  text-align: center;
+  margin: 0;
+}
 
-  /* menu desplegable*/
-/* Barra de navegación */
-.theme-toggle,
-.menu-toggle {
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--card-bg);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.button, .theme-toggle, .menu-toggle {
   display: inline-block;
-  text-align: start;
   padding: 10px 20px;
   font-size: 1rem;
-  text-decoration: none;
-  color: var(--text-color);
   background-color: var(--hover-bg);
-  border-radius: 5px;
+  color: var(--text-color);
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.theme-toggle:hover,
-.menu-toggle:hover {
+.button:hover, .theme-toggle:hover, .menu-toggle:hover {
   background-color: #673ab7;
 }
 
-.theme-toggle:focus,
-.menu-toggle:focus {
-  outline: 2px solid #845ec2;
-  outline-offset: 4px;
-}
-
-/* Menú deslizante */
 .menu-slideout {
   position: fixed;
   top: 0;
-  right: -150%; /* Oculto inicialmente */
+  right: -150%;
   width: 40%;
   height: 100%;
   background-color: var(--card-bg);
-  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
-  z-index: 999;
+  z-index: 1100;
 }
 
-.menu-slideout img{
-  padding-top: 60px;
-  width: 200px; /* Ajusta el ancho de la imagen */
-  height: auto; /* Mantiene la proporción de la imagen */
-  border-radius: 50%; /* Hace la imagen circular, si es cuadrada */
-  margin: 20px auto; /* Agrega espacio alrededor y centra horizontalmente */
-  display: block; /* Asegura que el margen automático funcione para centrar */
+.menu-slideout.active {
+  right: 0;
+}
+
+.menu-slideout img {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: block;
 }
 
 .menu-slideout ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-top: 60px;
+  list-style: none;
+  padding: 60px 0 0;
+  margin: 0;
+  text-align: center;
 }
 
 .menu-slideout li {
   margin-bottom: 100px;
 }
 
-.menu-slideout li a {
+.menu-slideout a {
+  color: var(--text-color);
   text-decoration: none;
-  color: var(--text-color); /*texto en menu desplegable*/
   font-size: 1.2rem;
-  transition: color 0.3s ease, font-weight 0.3s ease;
   font-family: cursive;
+  transition: color 0.3s ease;
 }
 
-.menu-slideout li a:hover {
+.menu-slideout a:hover {
   color: #845ec2;
   font-weight: bold;
 }
 
-.menu-slideout li a:hover {
-  color: #845ec2;
-}
-
-/* Activo (mostrar menú) */
-.menu-slideout.active {
-  right: 0;
-}
-
-/*contact*/
-.contact-card img {
-  width: 100px; /* Ajusta el tamaño según lo necesario */
-  height: 100px;
-  border-radius: 50%; /* Hace que la imagen sea circular */
-  object-fit: cover; /* Asegura que la imagen no se deforme */
-  margin: 0 auto 20px auto; /* Centra la imagen y agrega espacio inferior */
-  display: block; /* Garantiza que se mantenga alineada */
-}
-
-/* Sección de contacto */
-.contact-section {
-  position: relative;
-  margin-top: 80px; /* Altura del navbar */
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.contact-card {
-  background-color: var(--bg-color);
-  border-radius: 10px;
-  padding: 20px;
-  display: inline-block;
-  text-align: left;
-  width: 300px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.contact-item {
-  margin: 10px 0;
-}
-
-.social-icons a {
-  margin: 0 10px;
-  text-decoration: none;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
   color: var(--text-color);
-  font-size: 20px;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #ff9900;
-}
-
-/* Formulario de contacto */
-.contact-form {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-form input, 
-.contact-form textarea {
-  width: 75%;
-  max-width: 500px;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
   border: none;
-  background-color: var(--star-color);
-  color: var(--light-text-color);/*color al escribir en la caja*/
-  font-size: 16px;
-}
-
-.contact-form input::placeholder, 
-.contact-form textarea::placeholder {
-  color: var(--bg-color);
-}
-
-.contact-form button {
-  background-color: #ff9900;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-size: 24px;
   cursor: pointer;
-  margin-top: 10px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 1200;
 }
 
-.contact-form button:hover {
-  background-color: #cc7a00;
-  transform: translateY(-2px);
+.close-button:hover {
+  color: #ff6b6b;
 }
-/*__________________________*/
+
+#iframe {
+  width: 100%;
+  height: 90vh;
+  border: none;
+}

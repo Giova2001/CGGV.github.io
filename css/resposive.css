@@ -1,0 +1,83 @@
+@media (max-width: 600px) {
+  .navbar {
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .menu-slideout {
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    scrollbar-width: thin;
+    scrollbar-color: var(--hover-bg) transparent;
+  }
+
+  .menu-slideout img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+
+  .menu-slideout ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .menu-slideout li {
+    margin: 50px 0;
+  }
+
+  .menu-slideout a {
+    text-decoration: none;
+    color: var(--text-color); /* compatible con tema oscuro y claro */
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+
+  .menu-slideout::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .menu-slideout::-webkit-scrollbar-thumb {
+    background-color: var(--hover-bg);
+    border-radius: 4px;
+  }
+
+  .menu-slideout::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .contact-card {
+    width: 90%;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 90%;
+  }
+
+.contentFrame h1 {
+    font-size: 2.5rem;
+  }
+  
+  .contentFrame h2 {
+    font-size: 1.2rem;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+}
