@@ -3,6 +3,13 @@ export function initMenu() {
   const menuToggle = document.getElementById("menuToggle");
   const menuSlideout = document.getElementById("menuSlideout");
 
+  const closeButton = document.getElementById("closeMenuBtn");
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      menuSlideout.classList.remove("active");
+    });
+  }
+
   if (!menuToggle || !menuSlideout) return;
 
   menuToggle.addEventListener("click", () => {
@@ -24,5 +31,3 @@ export function closeMenu() {
     menuSlideout.classList.remove('active');
   }
 }
-
-window.closeMenu = closeMenu;
