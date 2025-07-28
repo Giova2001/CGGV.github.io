@@ -44,9 +44,14 @@
 
   <script src="js/theme.js"></script>
   <script src="js/stars.js"></script>
-  <script src="js/main.js"></script>
   <script type="module" src="js/main.js"></script>
-  <script src="js/contact.js"></script>
+  <script type="module">
+    import { initContactPage, setupEmailForm } from './js/contact.js';
+
+    // Ejecutar ambas funcionalidades
+    initContactPage();
+    setupEmailForm();
+  </script>
   <script src="js/contentLoader.js"></script>
 </body>
 </html>

@@ -6,13 +6,13 @@
       <img src="image/persona.png" alt="User Icon" class="icon">
       <div class="info-box">
         <div class="input-box">
-          Correo@gmail.com
+          tecnostore141@gmail.com
           <button class="copy-button">
             📋
             <span class="tooltip">copiar</span>
           </button>
         </div>
-        <div class="input-box">teléfono</div>
+        <div class="input-box">Telefono: 76123007</div>
       </div>
       <div class="contact-item social-icons">
         Conéctate:
@@ -20,14 +20,19 @@
         <a href="#" target="_blank">Github</a>
       </div>
     </div>
+
     <div class="contact-form">
-      <h2>Enviar Mensaje</h2>
-      <form>
-        <input type="text" placeholder="Nombre" required>
-        <input type="email" placeholder="Correo Electrónico" required>
-        <textarea rows="2" placeholder="Mensaje" required></textarea>
+      <h2>Contacto</h2>
+
+      <form id="contact-form">
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" id="correo" name="correo" placeholder="Tu correo electrónico" required>
+        <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
+        <div id="mensaje-alerta"></div>
+        <br>
+        <button type="submit">Enviar</button>
       </form>
-      <button type="submit">Enviar</button>
+      
     </div>
   </div>
 </section>
