@@ -1,0 +1,32 @@
+<section class="contentFrame">
+    <div class="chatbot-container">
+        <div class="chat-header">
+            🤖 Chatbot IA
+        </div>
+
+        <!-- Chat vacío, se llena con JS -->
+        <div class="chat-box"></div>
+
+        <div class="options">
+            <select id="questionSelect">
+                <option value="" disabled selected>Selecciona una pregunta...</option>
+                <option value="Cuéntame sobre ti">Cuéntame sobre ti</option>
+                <option value="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia con [lenguajeo tecnología]</option>
+                <option value="Cómo manejas la depuración de errores">Cómo manejas la depuración de errores</option>
+                <option value="Qué proyecto te enorgullece más">Qué proyecto te enorgullece más</option>
+                <option value="Cómo priorizas tareas en un proyecto">Cómo priorizas tareas en un proyecto</option>
+                <option value="Qué sabes sobre estructuras de datos y algoritmos">Qué sabes sobre estructuras de datos y algoritmos</option>
+                <option value="Por qué quieres trabajar en nuestra empresa">Por qué quieres trabajar en nuestra empresa</option>
+                <option value="Prefieres trabajar en equipo o individualmente">Prefieres trabajar en equipo o individualmente</option>
+                <option value="Cómo manejas el estrés o deadlines ajustados">Cómo manejas el estrés o deadlines ajustados</option>
+                <option value="Cuál es tu meta profesional a 5 años">Cuál es tu meta profesional a 5 años</option>
+            </select>
+            <button id="sendSelectBtn">Enviar</button>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Haz tu pregunta...">
+            <button id="send-btn">➤</button>
+        </div>
+    </div>
+</section>

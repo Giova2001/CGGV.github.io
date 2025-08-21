@@ -1,4 +1,4 @@
-import { initContactPage, setupEmailForm } from './contact.js'; // <--- Agrega setupEmailForm
+import { initContactPage, setupEmailForm } from './contact.js';
 import { closeMenu } from './menu.js';
 
 export function setupContentLoading() {
@@ -42,8 +42,17 @@ async function loadContent(url) {
     // Inicializar scripts específicos
     if (url === 'contact.html') {
       initContactPage();
-      setupEmailForm(); // <--- ESTO FALTABA
+      setupEmailForm();
     }
+
+    if (url === "chatbot.html") {
+    import('./chatbot.js')
+        .then(module => {
+            module.initChatBot(); // ✅ llama la función exportada
+        })
+        .catch(err => console.error("Error cargando chatbot.js:", err));
+}
+
 
   } catch (error) {
     mainContent.innerHTML = `<p class="error">Error al cargar contenido: ${error.message}</p>`;
