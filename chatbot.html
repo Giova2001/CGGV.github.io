@@ -1,34 +1,46 @@
 <section class="contentFrame">
-    <div class="chatbot-container" role="region" aria-label="Chatbot de entrevistas">
-        <div class="chat-header" role="banner">
-            🤖 Chatbot IA
-        </div>
+    <!-- Overlay para móvil -->
+    <div class="questions-overlay" id="questionsOverlay"></div>
 
-        <!-- Chat vacío, se llena con JS -->
-        <div class="chat-box" role="log" aria-live="polite" aria-label="Mensajes del chat"></div>
+    <div class="chatbot-wrapper" role="region" aria-label="Chatbot de entrevistas">
+        <!-- Sidebar con preguntas sugeridas -->
+        <aside class="questions-sidebar" role="complementary" aria-label="Preguntas sugeridas">
+            <button class="close-questions-btn" id="closeQuestionsBtn" aria-label="Cerrar menú de preguntas">✖</button>
+            <h3>💡 Preguntas Sugeridas</h3>
+            <div class="questions-list">
+                <button class="question-btn" data-question="Cuéntame sobre ti">Cuéntame sobre ti</button>
+                <button class="question-btn" data-question="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia</button>
+                <button class="question-btn" data-question="Cómo manejas la depuración de errores">Depuración de errores</button>
+                <button class="question-btn" data-question="Qué proyecto te enorgullece más">Proyecto destacado</button>
+                <button class="question-btn" data-question="Cómo priorizas tareas en un proyecto">Priorización de tareas</button>
+                <button class="question-btn" data-question="Qué sabes sobre estructuras de datos y algoritmos">Estructuras de datos</button>
+                <button class="question-btn" data-question="Por qué quieres trabajar en nuestra empresa">Motivación laboral</button>
+                <button class="question-btn" data-question="Prefieres trabajar en equipo o individualmente">Trabajo en equipo</button>
+                <button class="question-btn" data-question="Cómo manejas el estrés o deadlines ajustados">Manejo de estrés</button>
+                <button class="question-btn" data-question="Cuál es tu meta profesional a 5 años">Metas profesionales</button>
+            </div>
+        </aside>
 
-        <div class="options">
-            <label for="questionSelect" class="sr-only">Seleccionar pregunta predefinida</label>
-            <select id="questionSelect" aria-label="Selecciona una pregunta predefinida">
-                <option value="" disabled selected>Selecciona una pregunta...</option>
-                <option value="Cuéntame sobre ti">Cuéntame sobre ti</option>
-                <option value="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia con [lenguaje o tecnología]</option>
-                <option value="Cómo manejas la depuración de errores">Cómo manejas la depuración de errores</option>
-                <option value="Qué proyecto te enorgullece más">Qué proyecto te enorgullece más</option>
-                <option value="Cómo priorizas tareas en un proyecto">Cómo priorizas tareas en un proyecto</option>
-                <option value="Qué sabes sobre estructuras de datos y algoritmos">Qué sabes sobre estructuras de datos y algoritmos</option>
-                <option value="Por qué quieres trabajar en nuestra empresa">Por qué quieres trabajar en nuestra empresa</option>
-                <option value="Prefieres trabajar en equipo o individualmente">Prefieres trabajar en equipo o individualmente</option>
-                <option value="Cómo manejas el estrés o deadlines ajustados">Cómo manejas el estrés o deadlines ajustados</option>
-                <option value="Cuál es tu meta profesional a 5 años">Cuál es tu meta profesional a 5 años</option>
-            </select>
-            <button id="sendSelectBtn" aria-label="Enviar pregunta seleccionada">Enviar</button>
-        </div>
+        <!-- Contenedor principal del chat -->
+        <div class="chatbot-container">
+            <!-- Botón toggle (solo visible en móvil) -->
+            <button class="questions-toggle" id="questionsToggle" aria-label="Mostrar preguntas sugeridas" aria-expanded="false">
+                <span>💡 Preguntas Sugeridas</span>
+                <span class="toggle-icon">›</span>
+            </button>
+            <div class="chat-header" role="banner">
+                🤖 Chatbot IA
+            </div>
 
-        <div class="chat-input">
-            <label for="user-input" class="sr-only">Escribe tu pregunta</label>
-            <input type="text" id="user-input" placeholder="Haz tu pregunta..." aria-label="Campo para escribir tu pregunta" maxlength="500">
-            <button id="send-btn" aria-label="Enviar mensaje">➤</button>
+            <!-- Chat vacío, se llena con JS -->
+            <div class="chat-box" role="log" aria-live="polite" aria-label="Mensajes del chat"></div>
+
+            <!-- Input único -->
+            <div class="chat-input">
+                <label for="user-input" class="sr-only">Escribe tu pregunta</label>
+                <input type="text" id="user-input" placeholder="Haz tu pregunta..." aria-label="Campo para escribir tu pregunta" maxlength="500">
+                <button id="send-btn" aria-label="Enviar mensaje">➤</button>
+            </div>
         </div>
     </div>
 </section>

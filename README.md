@@ -47,7 +47,7 @@ giovacv.github.io/
 - **CSS3**: Variables CSS, Flexbox, Grid, Animaciones
 - **JavaScript (ES6+)**: Módulos ES6, async/await, Fetch API
 - **EmailJS**: Servicio para envío de emails desde el frontend
-- **OpenAI API**: Integración con backend para respuestas del chatbot
+- **Chatbot Inteligente**: Sistema de respuestas basado en palabras clave, completamente funcional en el frontend
 
 ##  Configuración
 
@@ -78,15 +78,15 @@ export const CONFIG = {
 3. Crea una plantilla de email
 4. Actualiza las credenciales en `js/config.js`
 
-### Backend del Chatbot
+### Chatbot
 
-El chatbot requiere un backend que maneje las peticiones a OpenAI. Ejemplo de endpoint:
+El chatbot funciona completamente en el frontend usando un sistema inteligente de reconocimiento de palabras clave. No requiere backend ni APIs externas, por lo que funciona perfectamente en GitHub Pages.
 
-```javascript
-POST /chat
-Body: { prompt: "tu pregunta" }
-Response: { reply: "respuesta del chatbot" }
-```
+- **Respuestas predefinidas**: Para preguntas comunes de entrevistas
+- **Reconocimiento inteligente**: Detecta palabras clave en las preguntas para dar respuestas relevantes
+- **Sistema de fallback**: Responde de manera útil incluso si no encuentra una coincidencia exacta
+
+Puedes personalizar las respuestas editando `js/config.js` en la sección `CHATBOT`.
 
 ##  Instalación y Uso
 
