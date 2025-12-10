@@ -119,6 +119,55 @@
   background: #6a0dad;
 }
 
+.chat-input button:focus,
+#sendSelectBtn:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.chat-input input:focus,
+#questionSelect:focus {
+  outline: 2px solid var(--hover-bg, #8f50f5c0);
+  outline-offset: 2px;
+}
+
+/* Clase para ocultar visualmente pero mantener accesibilidad */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Indicador de carga mejorado */
+.bot-msg[data-message-id="loading-indicator"] {
+  position: relative;
+}
+
+.bot-msg[data-message-id="loading-indicator"]::after {
+  content: "...";
+  animation: loadingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loadingDots {
+  0%, 20% { content: "."; }
+  40% { content: ".."; }
+  60%, 100% { content: "..."; }
+}
+
+/* Deshabilitar botones durante procesamiento */
+.chat-input button:disabled,
+#sendSelectBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .options {
     display: flex;
     gap: 10px;

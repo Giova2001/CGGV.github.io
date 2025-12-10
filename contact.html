@@ -3,34 +3,36 @@
   <div class="contact-section">
     <h1>Contáctame</h1>
     <div class="contact-card">
-      <img src="image/persona.png" alt="User Icon" class="icon">
+      <img src="image/persona.png" alt="Icono de contacto" class="icon">
       <div class="info-box">
         <div class="input-box">
-          tecnostore141@gmail.com
-          <button class="copy-button">
+          <span aria-label="Correo electrónico">tecnostore141@gmail.com</span>
+          <button class="copy-button" aria-label="Copiar correo electrónico al portapapeles">
             📋
             <span class="tooltip">copiar</span>
           </button>
         </div>
-        <div class="input-box">Telefono: 76123007</div>
+        <div class="input-box" aria-label="Número de teléfono">Teléfono: 76123007</div>
       </div>
       <div class="contact-item social-icons">
-        Conéctate:
-        <a href="#" target="_blank">LinkedIn</a>
-        <a href="#" target="_blank">Github</a>
+        <span>Conéctate:</span>
+        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil de LinkedIn">LinkedIn</a>
+        <a href="https://github.com/giovacv" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil de GitHub">Github</a>
       </div>
     </div>
 
     <div class="contact-form">
       <h2>Contacto</h2>
 
-      <form id="contact-form">
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-        <input type="email" id="correo" name="correo" placeholder="Tu correo electrónico" required>
-        <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
-        <div id="mensaje-alerta"></div>
-        <br>
-        <button type="submit">Enviar</button>
+      <form id="contact-form" aria-label="Formulario de contacto">
+        <label for="nombre" class="sr-only">Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" aria-label="Campo de nombre">
+        <label for="correo" class="sr-only">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" placeholder="Tu correo electrónico" required aria-required="true" aria-label="Campo de correo electrónico">
+        <label for="mensaje" class="sr-only">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" rows="5" required aria-required="true" aria-label="Campo de mensaje"></textarea>
+        <div id="mensaje-alerta" role="alert" aria-live="polite"></div>
+        <button type="submit" aria-label="Enviar formulario de contacto">Enviar</button>
       </form>
       
     </div>

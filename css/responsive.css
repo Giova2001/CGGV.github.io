@@ -1,0 +1,512 @@
+/* ===== Ajuste global para secciones principales ===== */
+main#main-content,
+.contentFrame,
+.contact-section,
+.chatbot-container {
+  margin-top: 130px;
+  /* evita que navbar fijo tape el contenido */
+  padding: 0 15px;
+  box-sizing: border-box;
+  transition: margin-top 0.3s ease;
+}
+
+/* ===== Tablets (768px y menos) ===== */
+@media (max-width: 768px) {
+  main#main-content,
+  .contentFrame,
+  .contact-section,
+  .chatbot-container {
+    margin-top: 120px;
+    padding: 0 20px;
+  }
+
+  .navbar h1 {
+    font-size: 1.5rem;
+  }
+
+  .menu-slideout {
+    width: 50%;
+  }
+}
+
+/* ===== Móviles grandes (600px y menos) ===== */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    /* apilar elementos verticalmente */
+    align-items: center;
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  .navbar h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .navbar div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .theme-toggle,
+  .menu-toggle {
+    flex: 1;
+    /* ambos botones ocupan el mismo ancho */
+    max-width: 150px;
+    /* opcional para no crecer demasiado */
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes para el menu-slideout */
+@media (max-width: 600px) {
+  .menu-slideout {
+    width: 100%;
+    /* ocupa todo el ancho */
+    right: -100%;
+    /* inicialmente fuera de pantalla */
+    top: 0;
+    height: 100%;
+    padding-top: 60px;
+    /* espacio para navbar */
+    overflow-y: auto;
+    /* scroll vertical si hay muchas opciones */
+    transition: right 0.3s ease-in-out;
+  }
+
+  .menu-slideout.active {
+    right: 0;
+  }
+
+  .menu-slideout nav ul {
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+  }
+
+  .menu-slideout li {
+    margin: 25px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu-slideout a {
+    font-size: 1.3rem;
+    display: block;
+    padding: 10px;
+  }
+
+  .menu-slideout img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+
+  .close-button {
+    font-size: 20px;
+    top: 8px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-slideout {
+    padding-top: 70px;
+  }
+
+  .menu-slideout img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .menu-slideout a {
+    font-size: 1.1rem;
+    padding: 8px;
+  }
+
+  .menu-slideout li {
+    margin: 20px 0;
+  }
+
+  .close-button {
+    font-size: 18px;
+    top: 5px;
+    right: 10px;
+  }
+
+  .loading {
+    font-size: 1rem;
+    padding: 30px 15px;
+  }
+
+  .error {
+    padding: 30px 15px;
+    margin: 15px;
+    font-size: 0.9rem;
+  }
+
+  .error h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ===== home.css ajustes móviles ===== */
+@media (max-width: 768px) {
+  .contentFrame .container {
+    margin-top: 15vh;
+    padding: 0 15px;
+  }
+
+  .contentFrame h1 {
+    font-size: 3rem;
+  }
+
+  .contentFrame h2 {
+    font-size: 1.3rem;
+  }
+
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contentFrame .container {
+    margin-top: 10vh;
+    /* espacio extra para navbar */
+    padding: 0 10px;
+  }
+
+  .contentFrame h1 {
+    font-size: 2.2rem;
+  }
+
+  .contentFrame h2 {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .contentFrame p {
+    font-size: 1rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .button {
+    width: 90%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .skills-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+    margin: 30px auto;
+  }
+
+  .skill-category {
+    padding: 20px;
+  }
+
+  .skill-category img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .skill-category h3 {
+    font-size: 1.3rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentFrame .container {
+    margin-top: 8vh;
+    padding: 0 8px;
+  }
+
+  .contentFrame h1 {
+    font-size: 1.8rem;
+  }
+
+  .contentFrame h2 {
+    font-size: 1rem;
+  }
+
+  .contentFrame p {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .skill-category {
+    padding: 15px;
+  }
+
+  .skill-category h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===== contact.css ajustes móviles ===== */
+@media (max-width: 768px) {
+  .contact-section {
+    margin-top: 150px;
+    padding: 40px 20px;
+  }
+
+  .contact-card {
+    width: 85%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    margin-top: 160px;
+    /* navbar fijo */
+    padding: 30px 10px;
+  }
+
+  .contact-section h1 {
+    font-size: 2rem;
+  }
+
+  .contact-card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .contact-card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .contact-form {
+    max-width: 100%;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 95%;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .contact-form button {
+    width: 90%;
+    max-width: 250px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    margin-top: 170px;
+    padding: 25px 8px;
+  }
+
+  .contact-section h1 {
+    font-size: 1.7rem;
+  }
+
+  .contact-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .contact-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .contact-card img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .contact-form button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+
+/* ===== chatbot.css ajustes móviles ===== */
+@media (max-width: 768px) {
+  .chatbot-container {
+    margin-top: 130px;
+    padding: 18px;
+    max-width: 95%;
+  }
+
+  .chat-header {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .chat-box {
+    max-height: 280px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .chatbot-container {
+    margin-top: 140px;
+    /* navbar fijo */
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .chat-header {
+    font-size: 15px;
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .chat-box {
+    max-height: 250px;
+    min-height: 120px;
+    padding: 10px;
+  }
+
+  .bot-msg,
+  .user-msg {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    max-width: 85%;
+    word-wrap: break-word;
+  }
+
+  .options {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .chat-input {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chat-input button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .chat-input input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  /* Ajuste del select de preguntas */
+  #questionSelect {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    white-space: normal;
+    /* permite que el texto largo se divida en varias líneas */
+    overflow-y: auto;
+    /* scroll si hay muchas opciones */
+    max-height: 200px;
+    /* límite de altura para el desplegable */
+  }
+
+  /* Ajuste del botón de enviar selección */
+  #sendSelectBtn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Mantener consistencia con otras opciones del chat */
+  .options {
+    gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Opcional: que las opciones largas del select se vean bien */
+  #questionSelect option {
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-container {
+    margin-top: 150px;
+    padding: 12px;
+  }
+
+  .chat-header {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .chat-box {
+    max-height: 220px;
+    padding: 8px;
+  }
+
+  .bot-msg,
+  .user-msg {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+    max-width: 90%;
+  }
+
+  #questionSelect {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  #sendSelectBtn {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .chat-input input {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .chat-input button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

@@ -1,17 +1,18 @@
 <section class="contentFrame">
-    <div class="chatbot-container">
-        <div class="chat-header">
+    <div class="chatbot-container" role="region" aria-label="Chatbot de entrevistas">
+        <div class="chat-header" role="banner">
             🤖 Chatbot IA
         </div>
 
         <!-- Chat vacío, se llena con JS -->
-        <div class="chat-box"></div>
+        <div class="chat-box" role="log" aria-live="polite" aria-label="Mensajes del chat"></div>
 
         <div class="options">
-            <select id="questionSelect">
+            <label for="questionSelect" class="sr-only">Seleccionar pregunta predefinida</label>
+            <select id="questionSelect" aria-label="Selecciona una pregunta predefinida">
                 <option value="" disabled selected>Selecciona una pregunta...</option>
                 <option value="Cuéntame sobre ti">Cuéntame sobre ti</option>
-                <option value="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia con [lenguajeo tecnología]</option>
+                <option value="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia con [lenguaje o tecnología]</option>
                 <option value="Cómo manejas la depuración de errores">Cómo manejas la depuración de errores</option>
                 <option value="Qué proyecto te enorgullece más">Qué proyecto te enorgullece más</option>
                 <option value="Cómo priorizas tareas en un proyecto">Cómo priorizas tareas en un proyecto</option>
@@ -21,12 +22,13 @@
                 <option value="Cómo manejas el estrés o deadlines ajustados">Cómo manejas el estrés o deadlines ajustados</option>
                 <option value="Cuál es tu meta profesional a 5 años">Cuál es tu meta profesional a 5 años</option>
             </select>
-            <button id="sendSelectBtn">Enviar</button>
+            <button id="sendSelectBtn" aria-label="Enviar pregunta seleccionada">Enviar</button>
         </div>
 
         <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Haz tu pregunta...">
-            <button id="send-btn">➤</button>
+            <label for="user-input" class="sr-only">Escribe tu pregunta</label>
+            <input type="text" id="user-input" placeholder="Haz tu pregunta..." aria-label="Campo para escribir tu pregunta" maxlength="500">
+            <button id="send-btn" aria-label="Enviar mensaje">➤</button>
         </div>
     </div>
 </section>

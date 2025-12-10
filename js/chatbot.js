@@ -1,3 +1,5 @@
+import { CONFIG } from './config.js';
+
 export function initChatBot() {
     console.log("🤖 Chatbot inicializado!");
 
@@ -7,55 +9,157 @@ export function initChatBot() {
     const questionSelect = document.getElementById("questionSelect");
     const sendSelectBtn = document.getElementById("sendSelectBtn");
 
-    if (!chatBox) return;
+    if (!chatBox || !input || !sendBtn || !questionSelect || !sendSelectBtn) {
+        console.error("❌ Elementos del chatbot no encontrados");
+        return;
+    }
 
-    // Limpiar mensajes previos
     chatBox.innerHTML = "";
+    let loadingMessageId = null;
+    let isProcessing = false;
 
-    const respuestas = {
-        "Cuéntame sobre ti": "📌 Soy un desarrollador con experiencia en [tu lenguaje/tecnología], enfocado en crear soluciones eficientes y escalables.",
-        "Cuál es tu experiencia con [lenguaje o tecnología]": "💻 He trabajado con [lenguaje/tecnología] en varios proyectos, incluyendo [breve ejemplo de proyecto].",
-        "Cómo manejas la depuración de errores": "🔧 Analizo cuidadosamente los logs, utilizo depuradores y pruebas unitarias para identificar y solucionar los problemas.",
-        "Qué proyecto te enorgullece más": "🚀 He trabajado en [nombre del proyecto], donde logré [resultado destacado].",
-        "Cómo priorizas tareas en un proyecto": "📊 Utilizo metodologías ágiles como Scrum o Kanban para organizar las tareas según importancia y urgencia.",
-        "Qué sabes sobre estructuras de datos y algoritmos": "📚 Conozco listas, colas, pilas, árboles y grafos, y aplico algoritmos eficientes para resolver problemas de manera óptima.",
-        "Por qué quieres trabajar en nuestra empresa": "🏢 Me interesa formar parte de su equipo por [motivo], y contribuir con mis habilidades en [área].",
-        "Prefieres trabajar en equipo o individualmente": "🤝 Disfruto trabajar en equipo colaborando y compartiendo ideas, pero también puedo trabajar de manera independiente y eficiente.",
-        "Cómo manejas el estrés o deadlines ajustados": "⏱️ Mantengo la calma, priorizo tareas y busco soluciones eficientes para cumplir los objetivos sin comprometer la calidad.",
-        "Cuál es tu meta profesional a 5 años": "🎯 Espero crecer como desarrollador, liderar proyectos y seguir aprendiendo nuevas tecnologías.",
-        "hola":"hola como estas, como puedo ayudarte"
-    };
+    const respuestas = CONFIG.CHATBOT.DEFAULT_RESPONSES;
 
-    // Mensajes iniciales
     addMessage("bot", "👋 Hola, soy una IA entrenada para entrevistas.");
     addMessage("bot", "Selecciona una pregunta del desplegable o escribe tu propia pregunta.");
 
-    function addMessage(sender, text) {
+    function addMessage(sender, text, messageId = null) {
         const div = document.createElement("div");
         div.className = sender === "bot" ? "bot-msg" : "user-msg";
         div.textContent = text;
+        if (messageId) div.setAttribute("data-message-id", messageId);
+        div.setAttribute("role", sender === "bot" ? "assistant" : "user");
+        div.setAttribute("aria-label", sender === "bot" ? "Mensaje del bot" : "Tu mensaje");
         chatBox.appendChild(div);
         chatBox.scrollTop = chatBox.scrollHeight;
+        return div;
     }
 
-    // Enviar pregunta desde select
-    sendSelectBtn.addEventListener("click", () => {
-        const pregunta = questionSelect.value;
-        if (!pregunta) return;
+    function removeMessage(messageId) {
+        const message = chatBox.querySelector(`[data-message-id="${messageId}"]`);
+        if (message) message.remove();
+    }
+
+    function showLoadingIndicator() {
+        const loadingDiv = addMessage("bot", "⏳ Escribiendo...", "loading-indicator");
+        loadingMessageId = "loading-indicator";
+        return loadingDiv;
+    }
+
+    function hideLoadingIndicator() {
+        if (loadingMessageId) {
+            removeMessage(loadingMessageId);
+            loadingMessageId = null;
+        }
+    }
+
+    // --- Función para enviar mensaje a OpenAI ---
+    async function enviarAOpenAI(prompt) {
+        if (isProcessing) {
+            addMessage("bot", "⏳ Por favor espera, estoy procesando tu mensaje anterior...");
+            return null;
+        }
+
+        isProcessing = true;
+        showLoadingIndicator();
+
+        try {
+            const apiUrl = `${CONFIG.API.BASE_URL}${CONFIG.API.ENDPOINTS.CHAT}`;
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            
+            if (!data || !data.reply) {
+                throw new Error("Respuesta inválida del servidor");
+            }
+
+            hideLoadingIndicator();
+            isProcessing = false;
+            return data.reply;
+        } catch (err) {
+            hideLoadingIndicator();
+            isProcessing = false;
+            console.error("Error en chatbot:", err);
+            
+            // Mensajes de error más específicos
+            if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError")) {
+                return "❌ Error de conexión. Por favor verifica que el servidor esté funcionando o intenta más tarde.";
+            }
+            return "❌ Error al obtener respuesta del servidor. Por favor intenta más tarde.";
+        }
+    }
+
+    // --- Enviar pregunta desde select ---
+    sendSelectBtn.addEventListener("click", async () => {
+        const pregunta = questionSelect.value.trim();
+        if (!pregunta) {
+            addMessage("bot", "⚠️ Por favor selecciona una pregunta del menú.");
+            return;
+        }
+
         addMessage("user", pregunta);
-        addMessage("bot", respuestas[pregunta] || "🤔 Lo siento, no tengo respuesta para eso.");
         questionSelect.selectedIndex = 0;
+
+        if (respuestas[pregunta]) {
+            // Pequeño delay para mejor UX
+            setTimeout(() => {
+                addMessage("bot", respuestas[pregunta]);
+            }, 300);
+        } else {
+            const respuesta = await enviarAOpenAI(pregunta);
+            if (respuesta) {
+                addMessage("bot", respuesta);
+            }
+        }
     });
 
-    // Enviar pregunta manual
+    // --- Enviar pregunta manual ---
     sendBtn.addEventListener("click", sendQuestion);
-    input.addEventListener("keypress", (e) => { if(e.key === "Enter") sendQuestion(); });
+    input.addEventListener("keypress", (e) => { 
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendQuestion();
+        }
+    });
 
-    function sendQuestion() {
+    async function sendQuestion() {
         const userText = input.value.trim();
-        if (!userText) return;
+        if (!userText) {
+            addMessage("bot", "⚠️ Por favor escribe una pregunta.");
+            return;
+        }
+
+        if (userText.length > 500) {
+            addMessage("bot", "⚠️ Tu mensaje es demasiado largo. Por favor limítalo a 500 caracteres.");
+            return;
+        }
+
         addMessage("user", userText);
-        addMessage("bot", respuestas[userText] || "🤔 Lo siento, no tengo respuesta para eso.");
         input.value = "";
+        sendBtn.disabled = true;
+        sendBtn.setAttribute("aria-busy", "true");
+
+        if (respuestas[userText]) {
+            setTimeout(() => {
+                addMessage("bot", respuestas[userText]);
+                sendBtn.disabled = false;
+                sendBtn.removeAttribute("aria-busy");
+            }, 300);
+        } else {
+            const respuesta = await enviarAOpenAI(userText);
+            if (respuesta) {
+                addMessage("bot", respuesta);
+            }
+            sendBtn.disabled = false;
+            sendBtn.removeAttribute("aria-busy");
+        }
     }
 }

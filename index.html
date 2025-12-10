@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Christopher Giovanni Garcia Vasquez</title>
+  <meta name="description" content="Portafolio de Christopher Giovanni Garcia Vasquez - Desarrollador Full Stack especializado en JavaScript, React, Node.js y Java">
+  <meta name="keywords" content="desarrollador, full stack, JavaScript, React, Node.js, Java, portafolio, web developer">
+  <meta name="author" content="Christopher Giovanni Garcia Vasquez">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Christopher Giovanni Garcia Vasquez - Portafolio">
+  <meta property="og:description" content="Desarrollador Full Stack apasionado por el desarrollo web, móvil y de escritorio">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Christopher Giovanni Garcia Vasquez - Portafolio">
+  <meta property="twitter:description" content="Desarrollador Full Stack apasionado por el desarrollo web, móvil y de escritorio">
+  
+  <title>Christopher Giovanni Garcia Vasquez - Portafolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/resposive.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/stars.css">
   <link rel="stylesheet" href="css/contact.css">
   <link rel="stylesheet" href="css/home.css">
@@ -15,25 +30,27 @@
 
 <body>
   <!-- Navbar -->
-  <div class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
     <h1>Portafolio</h1>
     <div>
-      <button class="theme-toggle" id="themeToggle">Modo oscuro</button>
-      <button class="menu-toggle" id="menuToggle">Menú</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/oscuro">Modo oscuro</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">Menú</button>
     </div>
-  </div>
+  </nav>
 
   <!-- Menú deslizante -->
-  <div class="menu-slideout" id="menuSlideout">
-    <button class="close-button" id="closeMenuBtn">✖</button>
-    <img src="image/yo.jpg" alt="yo">
-    <nav>
-      <li><a href="#" data-target="home.html">Inicio</a></li>
-      <li><a href="#" data-target="chatbot.html">About</a></li>
-      <li><a href="#" data-target="projects.html">Projects</a></li>
-      <li><a href="#" data-target="contact.html">Contact</a></li>
+  <aside class="menu-slideout" id="menuSlideout" role="complementary" aria-label="Menú lateral">
+    <button class="close-button" id="closeMenuBtn" aria-label="Cerrar menú">✖</button>
+    <img src="image/yo.jpg" alt="Foto de perfil de Christopher Giovanni Garcia Vasquez">
+    <nav role="navigation" aria-label="Menú de navegación">
+      <ul>
+        <li><a href="#" data-target="home.html" aria-label="Ir a la página de inicio">Inicio</a></li>
+        <li><a href="#" data-target="chatbot.html" aria-label="Ir a la sección sobre mí">About</a></li>
+        <li><a href="#" data-target="projects.html" aria-label="Ver proyectos">Projects</a></li>
+        <li><a href="#" data-target="contact.html" aria-label="Ir a la página de contacto">Contact</a></li>
+      </ul>
     </nav>
-  </div>
+  </aside>
 
   <!-- Contenedor de estrellas -->
   <div class="stars" id="stars"></div>
@@ -46,13 +63,40 @@
   <script src="js/theme.js"></script>
   <script src="js/stars.js"></script>
   <script type="module" src="js/main.js"></script>
-  <script src="js/contentLoader.js"></script>
-  <script type="module">
-    import { initContactPage, setupEmailForm } from './js/contact.js';
-
-    // Ejecutar ambas funcionalidades
-    initContactPage();
-    setupEmailForm();
+  
+  <!-- Fallback: Si los módulos fallan, cargar contenido directamente -->
+  <script>
+    // Verificar después de 2 segundos si el contenido se cargó
+    setTimeout(() => {
+      const mainContent = document.getElementById('main-content');
+      if (mainContent && (!mainContent.innerHTML || mainContent.innerHTML.trim() === '' || mainContent.innerHTML.includes('<!-- El contenido se cargará aquí dinámicamente -->'))) {
+        console.warn('⚠️ El contenido no se cargó automáticamente, intentando carga manual...');
+        fetch('home.html')
+          .then(response => {
+            if (response.ok) {
+              return response.text();
+            }
+            throw new Error('Error al cargar home.html');
+          })
+          .then(html => {
+            if (html && html.trim()) {
+              mainContent.innerHTML = html;
+              console.log('✅ Contenido cargado manualmente');
+            }
+          })
+          .catch(error => {
+            console.error('❌ Error en carga manual:', error);
+            mainContent.innerHTML = `
+              <div class="error" role="alert">
+                <h2>Error al cargar contenido</h2>
+                <p>Por favor verifica que el archivo home.html exista en la raíz del proyecto.</p>
+                <p style="font-size: 0.9rem; color: #888;">Error: ${error.message}</p>
+                <button onclick="location.reload()" class="button">Recargar página</button>
+              </div>
+            `;
+          });
+      }
+    }, 2000);
   </script>
 
 </body>
