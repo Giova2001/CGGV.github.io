@@ -60,6 +60,18 @@ export function initChatBot() {
             }
             if (closeQuestionsBtn) {
                 closeQuestionsBtn.style.display = "flex";
+                closeQuestionsBtn.style.visibility = "visible";
+                closeQuestionsBtn.style.opacity = "1";
+                // Calcular posición basada en el ancho del sidebar (280px) menos el tamaño del botón
+                const sidebarWidth = 280;
+                // Tamaño más grande en móvil
+                const buttonSize = window.innerWidth <= 480 ? 80 : 70;
+                closeQuestionsBtn.style.left = `${sidebarWidth - buttonSize - 10}px`; // 10px de margen
+                closeQuestionsBtn.style.width = `${buttonSize}px`;
+                closeQuestionsBtn.style.height = `${buttonSize}px`;
+                closeQuestionsBtn.style.fontSize = window.innerWidth <= 480 ? "44px" : "40px";
+                closeQuestionsBtn.style.border = window.innerWidth <= 480 ? "5px solid rgba(255, 255, 255, 1)" : "4px solid rgba(255, 255, 255, 1)";
+                console.log("🔘 Botón cerrar mostrado:", closeQuestionsBtn.style.display, `Tamaño: ${buttonSize}px`);
             }
             if (questionsToggle) {
                 questionsToggle.setAttribute("aria-expanded", "true");
@@ -360,7 +372,7 @@ export function initChatBot() {
             }
 
             const pregunta = btn.getAttribute("data-question");
-            if (!pregunta) return;
+        if (!pregunta) return;
 
             // Deshabilitar el botón mientras se procesa
             btn.disabled = true;
@@ -387,11 +399,11 @@ export function initChatBot() {
             }
 
             // Enviar la pregunta
-            addMessage("user", pregunta);
+        addMessage("user", pregunta);
             const respuesta = await procesarRespuesta(pregunta);
             if (respuesta) {
-                addMessage("bot", respuesta);
-            }
+            addMessage("bot", respuesta);
+        }
 
             // Rehabilitar el botón después de procesar
             setTimeout(() => {

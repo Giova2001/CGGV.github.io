@@ -421,12 +421,14 @@ main#main-content,
     height: 100vh !important;
     min-height: 100vh !important;
     max-height: 100vh !important;
-    padding: 70px 20px 20px 20px !important;
+    padding: 20px 20px 20px 20px !important; /* Reducir padding superior para que el botón no se oculte */
+    padding-top: 70px !important; /* Espacio para el botón de cerrar */
     margin: 0 !important;
     border-radius: 0 !important;
     border-right: 2px solid var(--hover-bg, #8f50f5c0) !important;
     z-index: 1100 !important; /* Mismo z-index que el menú */
     overflow-y: auto !important;
+    overflow-x: hidden !important; /* Evitar scroll horizontal */
     transition: left 0.3s ease !important; /* Transición con left, igual que el menú usa right */
     display: flex !important;
     flex-direction: column !important;
@@ -447,8 +449,21 @@ main#main-content,
   }
 
   /* Botón de cerrar visible cuando sidebar está activo */
-  .questions-sidebar.active .close-questions-btn {
+  .questions-sidebar.active .close-questions-btn,
+  .close-questions-btn {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Asegurar posición correcta del botón dentro del sidebar - tamaño más grande en móvil */
+  .questions-sidebar.active .close-questions-btn {
+    left: calc(280px - 80px) !important; /* Posicionado desde la izquierda del sidebar */
+    width: 70px !important;
+    height: 70px !important;
+    font-size: 40px !important;
+    top: 10px !important;
+    border: 4px solid rgba(255, 255, 255, 1) !important;
   }
 
   .questions-list {
@@ -616,12 +631,23 @@ main#main-content,
   }
 
   .questions-sidebar {
-    padding: 70px 12px 12px 12px !important; /* Mantener padding superior */
+    padding: 80px 12px 12px 12px !important; /* Más padding superior para el botón más grande */
   }
 
   .questions-toggle {
     padding: 10px 12px;
     font-size: 0.9rem;
+  }
+  
+  /* Botón de cerrar más grande en pantallas pequeñas */
+  .close-questions-btn {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 44px !important;
+    top: 8px !important;
+    left: calc(280px - 88px) !important;
+    border: 5px solid rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9) !important;
   }
 
   .chatbot-container {
