@@ -94,6 +94,16 @@ async function loadContent(url) {
       }
     }
 
+    // Inicializar proyectos cuando se carga projects.html
+    if (url === 'projects.html') {
+      try {
+        const projectsModule = await import('./projects.js');
+        projectsModule.initProjects();
+      } catch (err) {
+        console.error("Error cargando projects.js:", err);
+      }
+    }
+
     // Actualizar título de la página para accesibilidad
     const pageTitle = mainContent.querySelector('h1');
     if (pageTitle) {

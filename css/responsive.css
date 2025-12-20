@@ -1,7 +1,8 @@
 /* ===== Ajuste global para secciones principales ===== */
 main#main-content,
 .contentFrame,
-.contact-section {
+.contact-section,
+.projects-page {
   margin-top: 130px;
   /* evita que navbar fijo tape el contenido */
   padding: 0 15px;
@@ -26,9 +27,14 @@ main#main-content,
 /* ===== Tablets (768px y menos) ===== */
 @media (max-width: 768px) {
   main#main-content,
-  .contentFrame,
-  .contact-section {
+  .contact-section,
+  .projects-page {
     margin-top: 120px;
+    padding: 0 20px;
+  }
+
+  .contentFrame {
+    margin-top: 130px !important;
     padding: 0 20px;
   }
 
@@ -42,6 +48,24 @@ main#main-content,
 
   .menu-slideout {
     width: 50%;
+  }
+
+  /* Projects responsive */
+  .projects-main {
+    padding: 2em 1em;
+  }
+
+  .projects-main__heading {
+    font-size: 1.8em;
+  }
+
+  .cards__inner {
+    gap: 2em;
+  }
+
+  .card {
+    min-width: 250px;
+    max-width: 300px;
   }
 }
 
@@ -75,6 +99,32 @@ main#main-content,
     /* opcional para no crecer demasiado */
     padding: 10px;
     font-size: 0.9rem;
+  }
+
+  /* Projects responsive */
+  .projects-page {
+    margin-top: 120px;
+  }
+
+  .projects-main {
+    padding: 1.5em 0.5em;
+  }
+
+  .projects-main__heading {
+    font-size: 1.6em;
+    margin-bottom: 1.5em;
+  }
+
+  .cards__inner {
+    gap: 1.5em;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
   }
 }
 
@@ -208,7 +258,6 @@ main#main-content,
     width: 36px;
     height: 36px;
   }
-}
 
   .loading {
     font-size: 1rem;
@@ -223,6 +272,42 @@ main#main-content,
 
   .error h2 {
     font-size: 1.3rem;
+  }
+
+  /* Projects responsive - móvil pequeño */
+  .projects-page {
+    margin-top: 110px;
+    padding: 0 10px;
+  }
+
+  .projects-main {
+    padding: 1em 0.5em;
+  }
+
+  .projects-main__heading {
+    font-size: 1.4em;
+    margin-bottom: 1em;
+  }
+
+  .cards__inner {
+    gap: 1.2em;
+  }
+
+  .card {
+    padding: 1.2em 1.5em;
+  }
+
+  .card__heading {
+    font-size: 1.3em;
+  }
+
+  .card__description {
+    font-size: 0.9em;
+  }
+
+  .cta {
+    padding: 0.7em 1em;
+    font-size: 0.9rem;
   }
 }
 
@@ -346,6 +431,36 @@ main#main-content,
 }
 
 @media (max-width: 480px) {
+  .contentFrame .container {
+    margin-top: 8vh;
+    padding: 0 8px;
+  }
+
+  .contentFrame h1 {
+    font-size: 1.8rem;
+  }
+
+  .contentFrame h2 {
+    font-size: 1rem;
+  }
+
+  .contentFrame p {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .skill-category {
+    padding: 15px;
+  }
+
+  .skill-category h3 {
+    font-size: 1.1rem;
+  }
+
   /* Certificates Carousel - Mobile Small */
   .certificates-section h2 {
     font-size: 1.5rem;
@@ -386,38 +501,6 @@ main#main-content,
   }
 }
 
-@media (max-width: 480px) {
-  .contentFrame .container {
-    margin-top: 8vh;
-    padding: 0 8px;
-  }
-
-  .contentFrame h1 {
-    font-size: 1.8rem;
-  }
-
-  .contentFrame h2 {
-    font-size: 1rem;
-  }
-
-  .contentFrame p {
-    font-size: 0.9rem;
-  }
-
-  .button {
-    font-size: 0.9rem;
-    padding: 10px 20px;
-  }
-
-  .skill-category {
-    padding: 15px;
-  }
-
-  .skill-category h3 {
-    font-size: 1.1rem;
-  }
-}
-
 /* ===== contact.css ajustes móviles ===== */
 @media (max-width: 768px) {
   .contact-section {
@@ -427,7 +510,29 @@ main#main-content,
 
   .contact-card {
     width: 85%;
-    max-width: 400px;
+    padding: 20px;
+  }
+
+  .contact-card img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .contact-form {
+    max-width: 100%;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 95%;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .contact-form button {
+    width: 95%;
+    max-width: 300px;
+    padding: 12px 24px;
   }
 }
 
@@ -439,7 +544,11 @@ main#main-content,
   }
 
   .contact-section h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .contact-section h2 {
+    font-size: 1.3rem;
   }
 
   .contact-card {
@@ -510,6 +619,12 @@ main#main-content,
 
 /* ===== chatbot.css ajustes móviles ===== */
 @media (max-width: 1024px) {
+  /* Ajustar margin-top del contentFrame cuando contiene chatbot para evitar que navbar lo tape */
+  .contentFrame.chatbot-page {
+    margin-top: 140px !important;
+    padding-top: 10px;
+  }
+
   .chatbot-wrapper {
     flex-direction: row; /* Mantener en fila para que el sidebar se deslice */
     align-items: stretch;
@@ -634,6 +749,12 @@ main#main-content,
 }
 
 @media (max-width: 768px) {
+  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
+  .contentFrame.chatbot-page {
+    margin-top: 140px !important;
+    padding-top: 10px;
+  }
+
   .chatbot-wrapper {
     margin-top: 0;
     padding: 0 10px;
@@ -680,6 +801,12 @@ main#main-content,
 }
 
 @media (max-width: 600px) {
+  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
+  .contentFrame.chatbot-page {
+    margin-top: 150px !important;
+    padding-top: 10px;
+  }
+
   .chatbot-wrapper {
     margin-top: 0;
     padding: 0 8px;
@@ -719,48 +846,19 @@ main#main-content,
     padding: 12px;
   }
 
-  .chat-header {
-    font-size: 15px;
-    padding: 10px;
-    margin-bottom: 12px;
-  }
-
-  .chat-box {
-    max-height: 350px;
-    min-height: 250px;
-    padding: 12px;
-  }
-
-  .bot-msg,
-  .user-msg {
-    font-size: 0.9rem;
-    padding: 10px 14px;
-    max-width: 80%;
-  }
-
-  .chat-input {
-    gap: 10px;
-  }
-
-  .chat-input button {
-    padding: 12px 20px;
-    font-size: 18px;
-    min-width: 45px;
-  }
-
-  .chat-input input {
-    padding: 12px;
-    font-size: 14px;
-  }
-
-  /* No sobrescribir propiedades críticas del sidebar aquí */
   .question-btn {
-    padding: 10px 12px;
+    padding: 12px 14px;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
+  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
+  .contentFrame.chatbot-page {
+    margin-top: 160px !important;
+    padding-top: 10px;
+  }
+
   .chatbot-wrapper {
     margin-top: 0;
     padding: 0 5px;
@@ -807,39 +905,5 @@ main#main-content,
     max-height: 300px;
     min-height: 200px;
     padding: 10px;
-  }
-
-  .bot-msg,
-  .user-msg {
-    font-size: 0.85rem;
-    padding: 8px 12px;
-    max-width: 85%;
-  }
-
-  .chat-input input {
-    font-size: 13px;
-    padding: 10px;
-  }
-
-  .chat-input button {
-    padding: 10px 16px;
-    font-size: 16px;
-    min-width: 40px;
-  }
-
-  .questions-sidebar {
-    padding: 70px 12px 12px 12px !important; /* Mantener padding superior */
-    max-height: 100vh !important; /* Altura completa en móvil */
-  }
-
-  .questions-sidebar h3 {
-    font-size: 1rem;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-  }
-
-  .question-btn {
-    padding: 8px 10px;
-    font-size: 0.85rem;
   }
 }
