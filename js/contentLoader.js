@@ -4,12 +4,12 @@ import { closeMenu } from './menu.js';
 export function setupContentLoading() {
   const mainContent = document.getElementById('main-content');
   if (!mainContent) {
-    console.error("❌ Elemento main-content no encontrado");
+    console.error(" Elemento main-content no encontrado");
     return;
   }
 
   // Cargar home por defecto
-  console.log("📄 Cargando home.html...");
+  console.log("Cargando home.html...");
   loadContent('home.html');
 
   // Enlazar eventos a links iniciales
@@ -33,11 +33,11 @@ function setupDynamicLinks() {
 async function loadContent(url) {
   const mainContent = document.getElementById('main-content');
   if (!mainContent) {
-    console.error("❌ main-content no encontrado en loadContent");
+    console.error(" main-content no encontrado en loadContent");
     return;
   }
   
-  console.log(`📄 Cargando contenido: ${url}`);
+  console.log(` Cargando contenido: ${url}`);
   mainContent.innerHTML = `<div class="loading" role="status" aria-live="polite">Cargando...</div>`;
   mainContent.setAttribute("aria-busy", "true");
 
@@ -50,14 +50,14 @@ async function loadContent(url) {
       }
     });
     
-    console.log(`📡 Respuesta fetch:`, response.status, response.statusText);
+    console.log(`Respuesta fetch:`, response.status, response.statusText);
     
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status} ${response.statusText}`);
     }
 
     const html = await response.text();
-    console.log(`✅ Contenido cargado, longitud: ${html.length} caracteres`);
+    console.log(` Contenido cargado, longitud: ${html.length} caracteres`);
     
     if (!html || html.trim().length === 0) {
       throw new Error("El archivo está vacío");
@@ -81,6 +81,16 @@ async function loadContent(url) {
       } catch (err) {
         console.error("Error cargando chatbot.js:", err);
         mainContent.innerHTML += `<p class="error">Error al cargar el chatbot: ${err.message}</p>`;
+      }
+    }
+
+    // Inicializar carrusel de certificados cuando se carga home.html
+    if (url === 'home.html') {
+      try {
+        const certificatesModule = await import('./certificates.js');
+        certificatesModule.initCertificatesCarousel();
+      } catch (err) {
+        console.error("Error cargando certificates.js:", err);
       }
     }
 

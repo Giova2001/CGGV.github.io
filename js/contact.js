@@ -58,12 +58,12 @@ export function initContactPage() {
         // Fallback: buscar cualquier texto que parezca un email en el contenedor
         const text = inputBox.textContent.trim();
         const emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w+/);
-        textToCopy = emailMatch ? emailMatch[0] : text.replace(/📋|copiar/gi, '').trim();
+        textToCopy = emailMatch ? emailMatch[0] : text.replace(/copiar/gi, '').trim();
       }
       
       if (!textToCopy) {
         console.error('No se pudo encontrar el correo electrónico');
-        mostrarMensaje("❌ No se pudo encontrar el correo electrónico", "error");
+        mostrarMensaje("No se pudo encontrar el correo electrónico", "error");
         return;
       }
       
@@ -76,10 +76,10 @@ export function initContactPage() {
               tooltip.textContent = 'copiar';
             }, 2000);
           }
-          console.log(`✅ Correo copiado: ${textToCopy}`);
+          console.log(`Correo copiado: ${textToCopy}`);
         }).catch(err => {
           console.error('Error al copiar:', err);
-          mostrarMensaje("❌ Error al copiar al portapapeles", "error");
+          mostrarMensaje("Error al copiar al portapapeles", "error");
         });
       } else {
         // Fallback para navegadores antiguos
@@ -98,10 +98,10 @@ export function initContactPage() {
               tooltip.textContent = 'copiar';
             }, 2000);
           }
-          console.log(`✅ Correo copiado: ${textToCopy}`);
+          console.log(`Correo copiado: ${textToCopy}`);
         } catch (err) {
           console.error('Error al copiar:', err);
-          mostrarMensaje("❌ Error al copiar al portapapeles", "error");
+          mostrarMensaje("Error al copiar al portapapeles", "error");
         }
         document.body.removeChild(textArea);
       }
@@ -175,7 +175,7 @@ export function setupEmailForm() {
     const isMensajeValid = validateField(mensajeInput, 'mensaje');
 
     if (!isNombreValid || !isEmailValid || !isMensajeValid) {
-      mostrarMensaje("❌ Por favor completa todos los campos correctamente", "error");
+      mostrarMensaje("Por favor completa todos los campos correctamente", "error");
       return;
     }
 
@@ -190,7 +190,7 @@ export function setupEmailForm() {
         CONFIG.EMAILJS.TEMPLATE_ID, 
         datos
       );
-      mostrarMensaje("✅ ¡Mensaje enviado correctamente!", "success");
+      mostrarMensaje("¡Mensaje enviado correctamente!", "success");
       form.reset();
       // Limpiar clases de validación
       [nombreInput, correoInput, mensajeInput].forEach(field => {
@@ -198,7 +198,7 @@ export function setupEmailForm() {
       });
     } catch (error) {
       console.error("EmailJS error:", error);
-      mostrarMensaje("❌ Error al enviar el mensaje. Por favor intenta más tarde.", "error");
+      mostrarMensaje("Error al enviar el mensaje. Por favor intenta más tarde.", "error");
     } finally {
       submitBtn.disabled = false;
       submitBtn.removeAttribute("aria-busy");

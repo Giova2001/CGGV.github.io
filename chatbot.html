@@ -5,8 +5,8 @@
     <div class="chatbot-wrapper" role="region" aria-label="Chatbot de entrevistas">
         <!-- Sidebar con preguntas sugeridas -->
         <aside class="questions-sidebar" role="complementary" aria-label="Preguntas sugeridas">
-            <button class="close-questions-btn" id="closeQuestionsBtn" aria-label="Cerrar menú de preguntas" title="Cerrar">✕</button>
-            <h3>💡 Preguntas Sugeridas</h3>
+            <button class="close-questions-btn" id="closeQuestionsBtn" aria-label="Cerrar menú de preguntas" title="Cerrar">X</button>
+            <h3>Preguntas Sugeridas</h3>
             <div class="questions-list">
                 <button class="question-btn" data-question="Cuéntame sobre ti">Cuéntame sobre ti</button>
                 <button class="question-btn" data-question="Cuál es tu experiencia con [lenguaje o tecnología]">Cuál es tu experiencia</button>
@@ -25,11 +25,11 @@
         <div class="chatbot-container">
             <!-- Botón toggle (solo visible en móvil) -->
             <button class="questions-toggle" id="questionsToggle" aria-label="Mostrar preguntas sugeridas" aria-expanded="false">
-                <span>💡 Preguntas Sugeridas</span>
+                <span>Preguntas Sugeridas</span>
                 <span class="toggle-icon">›</span>
             </button>
             <div class="chat-header" role="banner">
-                🤖 Chatbot IA
+                Chatbot IA
             </div>
 
             <!-- Chat vacío, se llena con JS -->
@@ -39,7 +39,7 @@
             <div class="chat-input">
                 <label for="user-input" class="sr-only">Escribe tu pregunta</label>
                 <input type="text" id="user-input" placeholder="Haz tu pregunta..." aria-label="Campo para escribir tu pregunta" maxlength="500">
-                <button id="send-btn" aria-label="Enviar mensaje">➤</button>
+                <button id="send-btn" aria-label="Enviar mensaje">→</button>
             </div>
         </div>
     </div>

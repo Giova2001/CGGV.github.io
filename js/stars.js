@@ -2,7 +2,7 @@
 function initStars() {
   const starsContainer = document.getElementById("stars");
   if (!starsContainer) {
-    console.warn("⚠️ Contenedor de estrellas no encontrado");
+    console.warn("Contenedor de estrellas no encontrado");
     return;
   }
 

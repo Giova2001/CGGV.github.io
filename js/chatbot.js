@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
 
 export function initChatBot() {
-    console.log("🤖 Chatbot inicializado!");
+    console.log("Chatbot inicializado!");
 
     const chatBox = document.querySelector(".chat-box");
     const input = document.getElementById("user-input");
@@ -35,7 +35,7 @@ export function initChatBot() {
         }
 
         openQuestionsSidebar = function() {
-            console.log("🔓 Abriendo sidebar...");
+            console.log("Abriendo sidebar...");
             
             ensureSidebarPosition(); // Asegurar posición antes de abrir
             
@@ -49,7 +49,7 @@ export function initChatBot() {
                 // Usar setTimeout para asegurar que se aplique después de cualquier otro código
                 setTimeout(() => {
                     questionsSidebar.style.left = "0";
-                    console.log("🔧 Left confirmado después de timeout:", questionsSidebar.style.left);
+                    console.log("Left confirmado después de timeout:", questionsSidebar.style.left);
                 }, 10);
             }
             
@@ -71,7 +71,7 @@ export function initChatBot() {
                 closeQuestionsBtn.style.height = `${buttonSize}px`;
                 closeQuestionsBtn.style.fontSize = window.innerWidth <= 480 ? "44px" : "40px";
                 closeQuestionsBtn.style.border = window.innerWidth <= 480 ? "5px solid rgba(255, 255, 255, 1)" : "4px solid rgba(255, 255, 255, 1)";
-                console.log("🔘 Botón cerrar mostrado:", closeQuestionsBtn.style.display, `Tamaño: ${buttonSize}px`);
+                console.log("Botón cerrar mostrado:", closeQuestionsBtn.style.display, `Tamaño: ${buttonSize}px`);
             }
             if (questionsToggle) {
                 questionsToggle.setAttribute("aria-expanded", "true");
@@ -81,20 +81,20 @@ export function initChatBot() {
             // Verificar después de un breve delay y forzar si es necesario
             setTimeout(() => {
                 const computedLeft = window.getComputedStyle(questionsSidebar).left;
-                console.log("📋 Verificación final - left del sidebar:", computedLeft);
-                console.log("📋 Verificación final - inline style:", questionsSidebar.style.left);
+                console.log("Verificación final - left del sidebar:", computedLeft);
+                console.log("Verificación final - inline style:", questionsSidebar.style.left);
                 if (computedLeft !== "0px" && computedLeft !== "0") {
-                    console.warn("⚠️ Left no está en 0, forzando con setProperty...");
+                    console.warn("Left no está en 0, forzando con setProperty...");
                     questionsSidebar.style.setProperty("left", "0", "important");
-                    console.log("✅ Left forzado con important:", window.getComputedStyle(questionsSidebar).left);
+                    console.log("Left forzado con important:", window.getComputedStyle(questionsSidebar).left);
                 }
             }, 50);
             
-            console.log("✅ Sidebar abierto, left aplicado:", questionsSidebar.style.left);
+            console.log("Sidebar abierto, left aplicado:", questionsSidebar.style.left);
         };
 
         closeQuestionsSidebar = function() {
-            console.log("🔒 Cerrando sidebar...");
+            console.log("Cerrando sidebar...");
             
             // Forzar left: -100% directamente desde JavaScript
             if (window.innerWidth <= 1024) {
@@ -108,7 +108,7 @@ export function initChatBot() {
                 questionsToggle.setAttribute("aria-expanded", "false");
             }
             document.body.style.overflow = "";
-            console.log("✅ Sidebar cerrado");
+            console.log("Sidebar cerrado");
         };
 
         function updateToggleState() {
@@ -126,11 +126,11 @@ export function initChatBot() {
                     if (closeQuestionsBtn) closeQuestionsBtn.style.display = "none";
                     if (questionsToggle) questionsToggle.style.display = "flex";
                     document.body.style.overflow = "";
-                    console.log("✅ Modo móvil: sidebar oculto, botón visible");
+                    console.log("Modo móvil: sidebar oculto, botón visible");
                 } else {
                     // Si está activo, solo asegurar que el botón esté visible
                     if (questionsToggle) questionsToggle.style.display = "flex";
-                    console.log("✅ Modo móvil: sidebar activo, no modificar estado");
+                    console.log("Modo móvil: sidebar activo, no modificar estado");
                 }
             } else {
                 // En desktop, mostrar sidebar siempre y ocultar toggle
@@ -147,7 +147,7 @@ export function initChatBot() {
                 if (closeQuestionsBtn) closeQuestionsBtn.style.display = "none";
                 if (questionsToggle) questionsToggle.style.display = "none";
                 document.body.style.overflow = "";
-                console.log("✅ Modo desktop: sidebar siempre visible");
+                console.log("Modo desktop: sidebar siempre visible");
             }
         }
 
@@ -160,39 +160,39 @@ export function initChatBot() {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log("🔘 Click en toggle, ancho actual:", window.innerWidth);
-            console.log("📋 Sidebar disponible:", !!questionsSidebar);
-            console.log("📋 Funciones disponibles:", {
+            console.log("Click en toggle, ancho actual:", window.innerWidth);
+            console.log("Sidebar disponible:", !!questionsSidebar);
+            console.log("Funciones disponibles:", {
                 open: typeof openQuestionsSidebar === 'function',
                 close: typeof closeQuestionsSidebar === 'function'
             });
             
             if (window.innerWidth <= 1024) {
                 if (!questionsSidebar) {
-                    console.error("❌ Sidebar no encontrado!");
+                    console.error("Sidebar no encontrado!");
                     return;
                 }
                 
                 const isActive = questionsSidebar.classList.contains("active");
-                console.log(`📊 Estado actual del sidebar: ${isActive ? 'abierto' : 'cerrado'}`);
+                console.log(`Estado actual del sidebar: ${isActive ? 'abierto' : 'cerrado'}`);
                 
                 if (isActive) {
-                    console.log("🔒 Cerrando sidebar...");
+                    console.log("Cerrando sidebar...");
                     if (typeof closeQuestionsSidebar === 'function') {
                         closeQuestionsSidebar();
                     } else {
-                        console.error("❌ closeQuestionsSidebar no es una función!");
+                        console.error("closeQuestionsSidebar no es una función!");
                     }
                 } else {
-                    console.log("🔓 Abriendo sidebar...");
+                    console.log("Abriendo sidebar...");
                     if (typeof openQuestionsSidebar === 'function') {
                         openQuestionsSidebar();
                     } else {
-                        console.error("❌ openQuestionsSidebar no es una función!");
+                        console.error("openQuestionsSidebar no es una función!");
                     }
                 }
             } else {
-                console.log("🖥️ Modo desktop, no se puede abrir/cerrar");
+                console.log("Modo desktop, no se puede abrir/cerrar");
             }
         });
 
@@ -211,7 +211,7 @@ export function initChatBot() {
                 e.stopPropagation(); // Prevenir que el clic se propague
                 // Solo cerrar si se hace clic directamente en el overlay
                 if (e.target === questionsOverlay && !questionsSidebar.contains(e.target)) {
-                    console.log("🖱️ Click en overlay, cerrando sidebar");
+                    console.log("Click en overlay, cerrando sidebar");
                     closeQuestionsSidebar();
                 }
             });
@@ -245,7 +245,7 @@ export function initChatBot() {
             }, 250);
         });
     } else {
-        console.warn("⚠️ questionsToggle o questionsSidebar no encontrados");
+        console.warn("questionsToggle o questionsSidebar no encontrados");
     }
 
     chatBox.innerHTML = "";
@@ -257,7 +257,7 @@ export function initChatBot() {
     const keywordResponses = CONFIG.CHATBOT.KEYWORD_RESPONSES;
     const fallbackResponses = CONFIG.CHATBOT.DEFAULT_FALLBACK;
 
-    addMessage("bot", "👋 Hola, soy un asistente virtual para responder preguntas sobre Christopher.");
+    addMessage("bot", "Hola, soy un asistente virtual para responder preguntas sobre Christopher.");
     addMessage("bot", "Puedes seleccionar una pregunta del menú o escribir tu propia pregunta. Estoy aquí para ayudarte a conocer más sobre su experiencia y habilidades.");
 
     function addMessage(sender, text, messageId = null) {
@@ -278,7 +278,7 @@ export function initChatBot() {
     }
 
     function showLoadingIndicator() {
-        const loadingDiv = addMessage("bot", "⏳ Escribiendo...", "loading-indicator");
+        const loadingDiv = addMessage("bot", "Escribiendo...", "loading-indicator");
         loadingMessageId = "loading-indicator";
         return loadingDiv;
     }
@@ -328,16 +328,16 @@ export function initChatBot() {
         // Evitar procesar si ya está procesando o si es la misma pregunta
         if (isProcessing) {
             if (lastProcessedQuestion === preguntaNormalizada) {
-                console.log("⚠️ Ya se está procesando esta pregunta, ignorando...");
+                console.log("Ya se está procesando esta pregunta, ignorando...");
                 return null;
             }
-            addMessage("bot", "⏳ Por favor espera, estoy procesando tu mensaje anterior...");
+            addMessage("bot", "Por favor espera, estoy procesando tu mensaje anterior...");
             return null;
         }
 
         // Verificar si ya se procesó esta pregunta recientemente
         if (lastProcessedQuestion === preguntaNormalizada) {
-            console.log("⚠️ Esta pregunta ya fue procesada, ignorando duplicado...");
+            console.log("Esta pregunta ya fue procesada, ignorando duplicado...");
             return null;
         }
 
@@ -367,7 +367,7 @@ export function initChatBot() {
         btn.addEventListener("click", async (e) => {
             // Prevenir múltiples clics
             if (btn.disabled || isProcessing) {
-                console.log("⚠️ Botón deshabilitado o procesando, ignorando clic...");
+                console.log("Botón deshabilitado o procesando, ignorando clic...");
                 return;
             }
 
@@ -426,12 +426,12 @@ export function initChatBot() {
     async function sendQuestion() {
         const userText = input.value.trim();
         if (!userText) {
-            addMessage("bot", "⚠️ Por favor escribe una pregunta.");
+            addMessage("bot", "Por favor escribe una pregunta.");
             return;
         }
 
         if (userText.length > 500) {
-            addMessage("bot", "⚠️ Tu mensaje es demasiado largo. Por favor limítalo a 500 caracteres.");
+            addMessage("bot", "Tu mensaje es demasiado largo. Por favor limítalo a 500 caracteres.");
             return;
         }
 

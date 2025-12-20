@@ -250,6 +250,74 @@ main#main-content,
     font-size: 0.8rem;
     padding: 4px 10px;
   }
+
+  /* Certificates Carousel Responsive */
+  .certificates-section {
+    padding: 0 10px 30px;
+    margin-top: 40px;
+  }
+
+  .certificates-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .certificates-carousel {
+    padding: 15px;
+  }
+
+  .carousel-container {
+    height: 500px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .carousel-prev {
+    left: -20px;
+  }
+
+  .carousel-next {
+    right: -20px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Certificates Carousel - Mobile Small */
+  .certificates-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .certificates-carousel {
+    padding: 10px;
+  }
+
+  .carousel-container {
+    height: 400px;
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .carousel-prev {
+    left: -15px;
+  }
+
+  .carousel-next {
+    right: -15px;
+  }
+
+  .carousel-indicator {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 @media (max-width: 480px) {

@@ -88,7 +88,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   transition: transform 0.3s;
-  text-align: center; /* ✅ Esto centra el contenido inline como <img>, <h3>, etc. */
+  text-align: center; /* Esto centra el contenido inline como <img>, <h3>, etc. */
 }
 
 .skill-category:hover {
@@ -101,8 +101,8 @@
   object-fit: contain;
   margin-bottom: 15px;
   display: block;              /* asegura que ocupe toda la línea */
-  margin-left: auto;           /* ✅ centrado horizontal */
-  margin-right: auto;          /* ✅ centrado horizontal */
+  margin-left: auto;           /* centrado horizontal */
+  margin-right: auto;          /* centrado horizontal */
 }
 
 .skill-category h3 {
@@ -128,4 +128,178 @@
 
 .tag:hover {
   background-color: var(--hover-bg);
+}
+
+/* ===== Certificates Carousel ===== */
+.certificates-section {
+  margin-top: 60px;
+  padding: 0 20px 40px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.certificates-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: var(--text-color);
+}
+
+.certificates-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: var(--bg-color);
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  position: relative;
+}
+
+.carousel-slide[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+.pdf-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  pointer-events: auto;
+  /* Prevenir selección de texto */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Overlay para prevenir interacciones directas con el PDF */
+.pdf-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 1;
+  /* Permitir scroll pero bloquear otras interacciones */
+  pointer-events: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--hover-bg);
+  color: var(--text-color);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-btn:hover {
+  background-color: #673ab7;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-prev {
+  left: -25px;
+}
+
+.carousel-next {
+  right: -25px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--hover-bg);
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  padding: 0;
+}
+
+.carousel-indicator:hover {
+  transform: scale(1.3);
+  background-color: var(--hover-bg);
+}
+
+.carousel-indicator.active {
+  background-color: var(--hover-bg);
+  transform: scale(1.2);
+}
+
+.no-certificates,
+.error-certificates {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-color);
+  font-size: 1.1rem;
 }

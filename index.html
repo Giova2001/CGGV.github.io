@@ -19,7 +19,7 @@
   <meta property="twitter:description" content="Desarrollador Full Stack apasionado por el desarrollo web, móvil y de escritorio">
   
   <title>Christopher Giovanni Garcia Vasquez - Portafolio</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>CG</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/stars.css">
@@ -70,7 +70,7 @@
     setTimeout(() => {
       const mainContent = document.getElementById('main-content');
       if (mainContent && (!mainContent.innerHTML || mainContent.innerHTML.trim() === '' || mainContent.innerHTML.includes('<!-- El contenido se cargará aquí dinámicamente -->'))) {
-        console.warn('⚠️ El contenido no se cargó automáticamente, intentando carga manual...');
+        console.warn('El contenido no se cargó automáticamente, intentando carga manual...');
         fetch('home.html')
           .then(response => {
             if (response.ok) {
@@ -81,11 +81,11 @@
           .then(html => {
             if (html && html.trim()) {
               mainContent.innerHTML = html;
-              console.log('✅ Contenido cargado manualmente');
+              console.log('Contenido cargado manualmente');
             }
           })
           .catch(error => {
-            console.error('❌ Error en carga manual:', error);
+            console.error('Error en carga manual:', error);
             mainContent.innerHTML = `
               <div class="error" role="alert">
                 <h2>Error al cargar contenido</h2>
