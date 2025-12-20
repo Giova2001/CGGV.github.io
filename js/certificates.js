@@ -21,31 +21,38 @@ export function initCertificatesCarousel() {
   // Empezamos desde 01.pdf y vamos incrementando hasta que no encontremos más
   async function findCertFiles() {
     const maxFiles = 20; // Límite máximo para evitar bucles infinitos
-    const promises = [];
+    const foundFiles = [];
+    let consecutiveFails = 0; // Contador de fallos consecutivos
+    const maxConsecutiveFails = 3; // Dejar de buscar después de 3 fallos consecutivos
 
-    // Verificar archivos en paralelo para mejor rendimiento
+    // Verificar archivos secuencialmente para detener cuando no haya más archivos
     for (let i = 1; i <= maxFiles; i++) {
       const num = i.toString().padStart(2, '0'); // 01, 02, 03, etc.
       const filePath = `image/certs/${num}.pdf`;
       
-      promises.push(
-        fetch(filePath, { method: 'HEAD' })
-          .then(response => {
-            if (response.ok) {
-              return { path: filePath, order: i };
-            }
-            return null;
-          })
-          .catch(() => null)
-      );
+      try {
+        const response = await fetch(filePath, { method: 'HEAD' });
+        if (response.ok) {
+          foundFiles.push({ path: filePath, order: i });
+          consecutiveFails = 0; // Resetear contador de fallos
+        } else {
+          consecutiveFails++;
+          // Si hay 3 fallos consecutivos, asumir que no hay más archivos
+          if (consecutiveFails >= maxConsecutiveFails) {
+            break;
+          }
+        }
+      } catch (error) {
+        consecutiveFails++;
+        // Si hay 3 fallos consecutivos, asumir que no hay más archivos
+        if (consecutiveFails >= maxConsecutiveFails) {
+          break;
+        }
+      }
     }
 
-    const results = await Promise.all(promises);
-    // Filtrar nulos y ordenar por el número de orden
-    return results
-      .filter(result => result !== null)
-      .sort((a, b) => a.order - b.order)
-      .map((result, index) => ({ path: result.path, index }));
+    // Mapear con índice para el carrusel
+    return foundFiles.map((result, index) => ({ path: result.path, index }));
   }
 
   // Cargar y crear el carrusel
@@ -72,6 +79,10 @@ export function initCertificatesCarousel() {
         // Crear slide del carrusel
         const slide = document.createElement('div');
         slide.className = 'carousel-slide';
+        // Agregar clase active al primer slide
+        if (index === 0) {
+          slide.classList.add('active');
+        }
         slide.setAttribute('data-index', index);
         slide.setAttribute('role', 'tabpanel');
         slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');

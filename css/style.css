@@ -154,6 +154,13 @@ h1, h2, p {
   font-size: 24px;
   cursor: pointer;
   z-index: 1200;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
 .close-button:hover {

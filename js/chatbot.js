@@ -62,16 +62,17 @@ export function initChatBot() {
                 closeQuestionsBtn.style.display = "flex";
                 closeQuestionsBtn.style.visibility = "visible";
                 closeQuestionsBtn.style.opacity = "1";
-                // Calcular posición basada en el ancho del sidebar (280px) menos el tamaño del botón
-                const sidebarWidth = 280;
-                // Tamaño más grande en móvil
-                const buttonSize = window.innerWidth <= 480 ? 80 : 70;
-                closeQuestionsBtn.style.left = `${sidebarWidth - buttonSize - 10}px`; // 10px de margen
-                closeQuestionsBtn.style.width = `${buttonSize}px`;
-                closeQuestionsBtn.style.height = `${buttonSize}px`;
-                closeQuestionsBtn.style.fontSize = window.innerWidth <= 480 ? "44px" : "40px";
-                closeQuestionsBtn.style.border = window.innerWidth <= 480 ? "5px solid rgba(255, 255, 255, 1)" : "4px solid rgba(255, 255, 255, 1)";
-                console.log("Botón cerrar mostrado:", closeQuestionsBtn.style.display, `Tamaño: ${buttonSize}px`);
+                // X negra simple - posición y estilo
+                closeQuestionsBtn.style.left = window.innerWidth <= 480 ? "245px" : "250px";
+                closeQuestionsBtn.style.top = window.innerWidth <= 480 ? "12px" : "15px";
+                closeQuestionsBtn.style.fontSize = window.innerWidth <= 480 ? "28px" : "32px";
+                closeQuestionsBtn.style.background = "transparent";
+                closeQuestionsBtn.style.color = "#000";
+                closeQuestionsBtn.style.border = "none";
+                closeQuestionsBtn.style.width = "auto";
+                closeQuestionsBtn.style.height = "auto";
+                closeQuestionsBtn.style.padding = "5px";
+                console.log("Botón cerrar mostrado (X negra)");
             }
             if (questionsToggle) {
                 questionsToggle.setAttribute("aria-expanded", "true");
@@ -155,46 +156,53 @@ export function initChatBot() {
         ensureSidebarPosition(); // Asegurar posición inicial
         updateToggleState();
 
+        // Prevenir múltiples event listeners
+        let toggleHandlerAdded = false;
+        
         // Manejar clic en el botón toggle
-        questionsToggle.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log("Click en toggle, ancho actual:", window.innerWidth);
-            console.log("Sidebar disponible:", !!questionsSidebar);
-            console.log("Funciones disponibles:", {
-                open: typeof openQuestionsSidebar === 'function',
-                close: typeof closeQuestionsSidebar === 'function'
-            });
-            
-            if (window.innerWidth <= 1024) {
-                if (!questionsSidebar) {
-                    console.error("Sidebar no encontrado!");
+        if (!toggleHandlerAdded) {
+            questionsToggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Prevenir clics rápidos múltiples
+                if (questionsToggle.hasAttribute('data-processing')) {
                     return;
                 }
                 
-                const isActive = questionsSidebar.classList.contains("active");
-                console.log(`Estado actual del sidebar: ${isActive ? 'abierto' : 'cerrado'}`);
+                questionsToggle.setAttribute('data-processing', 'true');
+                setTimeout(() => {
+                    questionsToggle.removeAttribute('data-processing');
+                }, 300);
                 
-                if (isActive) {
-                    console.log("Cerrando sidebar...");
-                    if (typeof closeQuestionsSidebar === 'function') {
-                        closeQuestionsSidebar();
+                console.log("Click en toggle, ancho actual:", window.innerWidth);
+                
+                if (window.innerWidth <= 1024) {
+                    if (!questionsSidebar) {
+                        console.error("Sidebar no encontrado!");
+                        return;
+                    }
+                    
+                    const isActive = questionsSidebar.classList.contains("active");
+                    console.log(`Estado actual del sidebar: ${isActive ? 'abierto' : 'cerrado'}`);
+                    
+                    if (isActive) {
+                        console.log("Cerrando sidebar...");
+                        if (typeof closeQuestionsSidebar === 'function') {
+                            closeQuestionsSidebar();
+                        }
                     } else {
-                        console.error("closeQuestionsSidebar no es una función!");
+                        console.log("Abriendo sidebar...");
+                        if (typeof openQuestionsSidebar === 'function') {
+                            openQuestionsSidebar();
+                        }
                     }
                 } else {
-                    console.log("Abriendo sidebar...");
-                    if (typeof openQuestionsSidebar === 'function') {
-                        openQuestionsSidebar();
-                    } else {
-                        console.error("openQuestionsSidebar no es una función!");
-                    }
+                    console.log("Modo desktop, no se puede abrir/cerrar");
                 }
-            } else {
-                console.log("Modo desktop, no se puede abrir/cerrar");
-            }
-        });
+            });
+            toggleHandlerAdded = true;
+        }
 
         // Manejar clic en botón cerrar
         if (closeQuestionsBtn) {
