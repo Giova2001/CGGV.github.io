@@ -26,6 +26,19 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden; /* Prevenir scroll horizontal global */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden; /* Prevenir scroll horizontal a nivel de html */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 

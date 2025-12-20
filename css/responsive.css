@@ -318,6 +318,7 @@ main#main-content,
 
   .certificates-carousel {
     padding: 15px;
+    overflow: hidden; /* Prevenir scroll horizontal */
   }
 
   .carousel-container {
@@ -331,11 +332,16 @@ main#main-content,
   }
 
   .carousel-prev {
-    left: -20px;
+    left: 5px; /* Dentro del contenedor */
   }
 
   .carousel-next {
-    right: -20px;
+    right: 5px; /* Dentro del contenedor */
+  }
+  
+  .certificates-section {
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+    padding: 0 15px 30px;
   }
 }
 
@@ -348,6 +354,7 @@ main#main-content,
 
   .certificates-carousel {
     padding: 10px;
+    overflow: hidden; /* Prevenir scroll horizontal */
   }
 
   .carousel-container {
@@ -361,16 +368,21 @@ main#main-content,
   }
 
   .carousel-prev {
-    left: -15px;
+    left: 5px; /* Dentro del contenedor */
   }
 
   .carousel-next {
-    right: -15px;
+    right: 5px; /* Dentro del contenedor */
   }
 
   .carousel-indicator {
     width: 10px;
     height: 10px;
+  }
+  
+  .certificates-section {
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+    padding: 0 10px 30px;
   }
 }
 
