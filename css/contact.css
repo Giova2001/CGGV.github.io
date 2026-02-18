@@ -1,147 +1,170 @@
-/* === contact.css ajustado y responsivo === */
-
-/* Contenedor general */
+/* Contenedor principal - Mantiene amplitud */
 .contact-section {
-  position: relative;
-  margin-top: 140px; /* suficiente espacio para navbar fijo */
-  text-align: center;
-  padding: 50px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 50px; /* Espaciado amplio solicitado */
+  padding: 100px 20px;
+  max-width: 50vw; /* Respeta tu medida original */
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* Tarjeta de contacto */
-.contact-card {
-  background-color: var(--card-bg, #2a2a3b);
-  border-radius: 10px;
-  padding: 20px;
-  width: 300px;
-  max-width: 90%; /* responsivo */
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-  text-align: center; /* centra el contenido */
-  margin-bottom: 20px;
-  color: var(--text-color, #fff);
+/* Caja de información */
+.info-box {
+  display: grid;
+  gap: 20px;
+  padding: 10px;
+  margin-bottom: 20px; /* Incrementado para evitar cercanía */
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tarjetas y Métodos */
+.contact-card, 
+.contact__method {
+  background: var(--bg-color);
+  border: 1px solid var(--hover-bg);
+  border-radius: 16px;
+  padding: 30px;
+  width: 100%;
+  max-width: 50vw;
+  color: var(--text-color);
+  box-shadow: 0 10px 30px var(--star-color);
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.contact__method{
+  margin: 10px;
 }
 
 .contact-card img {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 20px;
+  border: 2px solid var(--hover-bg);
+  padding: 5px;
 }
 
-/* Formulario */
+.contact-card:hover, 
+.contact__method:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(143, 80, 245, 0.05); /* Sutil tinte del color hover */
+  border-color: var(--hover-bg);
+  box-shadow: 0 20px 40px rgba(143, 80, 245, 0.2);
+}
+
+/* Formulario - Sincronizado con el estilo de las tarjetas */
+/* Contenedor del formulario */
 .contact-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Centra el H2 y el form */
+  gap: 20px;
+  background: var(--bg-color);
+  border: 1px solid var(--hover-bg);
+  border-radius: 16px;
+  padding: 40px;
   width: 100%;
-  max-width: 500px;
+  max-width: 50vw;
+  box-shadow: 0 10px 30px var(--star-color);
+  box-sizing: border-box;
 }
 
+/* El elemento <form> dentro del div */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  align-items: center; /* ESTO CENTRA EL BOTÓN Y LOS INPUTS */
+  gap: 15px;
+}
+
+/* Inputs y Textarea al 100% para que sean uniformes */
 .contact-form input,
 .contact-form textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: 2px solid transparent;
-  background-color: var(--star-color, rgba(255,255,255,0.1));
-  color: var(--text-color, #fff);
-  font-size: 16px;
+  width: 100%; 
+  max-width: 100%; /* Evita que se desborden */
   box-sizing: border-box;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  /* ... resto de tus estilos de input ... */
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--hover-bg, #8f50f5c0);
-  background-color: var(--card-bg, #2a2a3b);
-}
-
-.contact-form input.success,
-.contact-form textarea.success {
-  border-color: #28a745;
-}
-
-.contact-form input.error,
-.contact-form textarea.error {
-  border-color: #dc3545;
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-.contact-form button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: var(--text-color, #ccc);
-}
-
+/* Botón con el nuevo degradado acorde a la página */
 .contact-form button {
-  width: 50%;
-  max-width: 250px;
-  background-color: #ff9900;
-  color: white;
+  display: block;
+  margin: 20px auto 0; /* Centrado clásico con márgenes */
+  width: 100%;
+  max-width: 280px;
+  
+  /* Degradado: Azul Link -> Morado Hover */
+  background: linear-gradient(135deg, var(--link-color) 0%, #8f50f5 100%);
+  
+  color: var(--text-color);
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
+  transition: var(--transition-smooth);
+  
+  /* Sombra acorde al nuevo color azul/morado */
+  box-shadow: 0 5px 15px rgba(143, 80, 245, 0.4);
+}
+
+.contact-form button:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  /* Brillo extra al pasar el mouse */
+  filter: brightness(1.2);
+  box-shadow: 0 8px 25px rgba(143, 80, 245, 0.6);
+}
+
+.contact-form button:active {
+  transform: translateY(0);
+}
+
+/* Enlaces */
+.contact__link {
+  display: inline-block;
   margin-top: 10px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
 }
 
-.contact-form button:hover {
-  background-color: #cc7a00;
-  transform: translateY(-2px);
-}
-
-/* Alertas */
-.alert-success, .alert-error {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 20px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  z-index: 9999;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-.alert-success { background-color: #28a745; }
-.alert-error { background-color: #dc3545; }
-
-/* Clase para ocultar visualmente pero mantener accesibilidad */
-.sr-only {
+.contact__link::after {
+  content: '';
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--hover-bg);
+  transition: width 0.3s ease;
 }
 
-/* Mejoras de accesibilidad */
-.contact-form input:focus,
-.contact-form textarea:focus,
-.contact-form button:focus {
-  outline: 2px solid var(--hover-bg, #8f50f5c0);
-  outline-offset: 2px;
+.contact__link:hover::after {
+  width: 100%;
 }
 
-.copy-button:focus {
-  outline: 2px solid var(--hover-bg, #8f50f5c0);
-  outline-offset: 2px;
+/* Media query para no romper el 50vw en móviles */
+@media (max-width: 1024px) {
+  .contact-section, 
+  .contact-card, 
+  .contact__method, 
+  .contact-form {
+    max-width: 90vw;
+  }
 }

@@ -1,909 +1,105 @@
-/* ===== Ajuste global para secciones principales ===== */
-main#main-content,
-.contentFrame,
-.contact-section,
-.projects-page {
-  margin-top: 130px;
-  /* evita que navbar fijo tape el contenido */
-  padding: 0 15px;
-  box-sizing: border-box;
-  transition: margin-top 0.3s ease;
-}
-
-/* El chatbot-wrapper maneja su propio spacing dentro del contentFrame */
-.contentFrame .chatbot-wrapper {
-  margin-top: 0;
-}
-
-.chatbot-container {
-  margin-top: 0 !important; /* Sin margen, el wrapper maneja el spacing */
-}
-
-/* El chatbot-wrapper maneja su propio spacing dentro del contentFrame */
-.contentFrame .chatbot-wrapper {
-  margin-top: 0;
-}
-
-/* ===== Tablets (768px y menos) ===== */
-@media (max-width: 768px) {
-  main#main-content,
-  .contact-section,
-  .projects-page {
-    margin-top: 120px;
-    padding: 0 20px;
-  }
-
-  .contentFrame {
-    margin-top: 130px !important;
-    padding: 0 20px;
-  }
-
-  .chatbot-container {
-    margin-top: 0;
-  }
-
-  .navbar h1 {
-    font-size: 1.5rem;
-  }
-
-  .menu-slideout {
-    width: 50%;
-  }
-
-  /* Projects responsive */
-  .projects-main {
-    padding: 2em 1em;
-  }
-
-  .projects-main__heading {
-    font-size: 1.8em;
-  }
-
-  .cards__inner {
-    gap: 2em;
-  }
-
-  .card {
-    min-width: 250px;
-    max-width: 300px;
-  }
-}
-
-/* ===== Móviles grandes (600px y menos) ===== */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    /* apilar elementos verticalmente */
-    align-items: center;
-    gap: 10px;
-    padding: 15px 10px;
-  }
-
-  .navbar h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .navbar div {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .theme-toggle,
-  .menu-toggle {
-    flex: 1;
-    /* ambos botones ocupan el mismo ancho */
-    max-width: 150px;
-    /* opcional para no crecer demasiado */
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  /* Projects responsive */
-  .projects-page {
-    margin-top: 120px;
-  }
-
-  .projects-main {
-    padding: 1.5em 0.5em;
-  }
-
-  .projects-main__heading {
-    font-size: 1.6em;
-    margin-bottom: 1.5em;
-  }
-
-  .cards__inner {
-    gap: 1.5em;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 100%;
-    min-width: auto;
-  }
-}
-
-/* Ajustes para el menu-slideout */
-@media (max-width: 600px) {
-  .menu-slideout {
-    width: 85%;
-    /* Ancho más cómodo, no ocupa toda la pantalla */
-    max-width: 320px;
-    /* Límite máximo para pantallas grandes */
-    right: -100%;
-    /* inicialmente fuera de pantalla */
-    top: 0;
-    height: 100vh;
-    /* usar viewport height para evitar problemas */
-    padding: 80px 20px 30px;
-    /* Mejor distribución del espacio: más arriba para navbar, más abajo para contenido */
-    overflow-y: auto;
-    /* scroll vertical si hay muchas opciones */
-    transition: right 0.3s ease-in-out;
-    /* Prevenir scroll del body cuando el menú está abierto */
-    position: fixed;
-    z-index: 1100;
-    box-sizing: border-box;
-  }
-
-  .menu-slideout.active {
-    right: 0;
-  }
-  
-  /* Prevenir scroll del body cuando el menú está abierto en móvil */
-  body.menu-open {
-    overflow: hidden !important;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-  }
-
-  .menu-slideout nav ul {
-    flex-direction: column;
-    align-items: center;
-    list-style: none;
-    padding: 30px 0 20px;
-    margin: 0;
-    gap: 0;
-  }
-
-  .menu-slideout li {
-    margin: 15px 0;
-    width: 100%;
-    text-align: center;
-  }
-
-  .menu-slideout a {
-    font-size: 1.15rem;
-    display: block;
-    padding: 14px 20px;
-    /* Más padding para mejor área de clic */
-    border-radius: 8px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-
-  .menu-slideout a:hover,
-  .menu-slideout a:focus {
-    background-color: var(--hover-bg);
-    color: var(--text-color);
-  }
-
-  .menu-slideout img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    margin: 0 auto 25px;
-    display: block;
-    object-fit: cover;
-    /* Asegurar que la imagen mantenga proporciones */
-  }
-
-  .close-button {
-    font-size: 24px;
-    top: 12px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.2s ease;
-  }
-
-  .close-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-@media (max-width: 480px) {
-  .menu-slideout {
-    width: 90%;
-    /* Un poco más ancho en pantallas muy pequeñas */
-    max-width: none;
-    padding: 70px 15px 25px;
-    /* Ajustar padding para pantallas muy pequeñas */
-  }
-
-  .menu-slideout img {
-    width: 95px;
-    height: 95px;
-    margin-bottom: 20px;
-  }
-
-  .menu-slideout a {
-    font-size: 1rem;
-    padding: 12px 16px;
-    /* Padding reducido pero aún cómodo */
-  }
-
-  .menu-slideout li {
-    margin: 12px 0;
-    /* Menor margen entre elementos */
-  }
-
-  .menu-slideout nav ul {
-    padding: 25px 0 15px;
-  }
-
-  .close-button {
-    font-size: 22px;
-    top: 10px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .loading {
-    font-size: 1rem;
-    padding: 30px 15px;
-  }
-
-  .error {
-    padding: 30px 15px;
-    margin: 15px;
-    font-size: 0.9rem;
-  }
-
-  .error h2 {
-    font-size: 1.3rem;
-  }
-
-  /* Projects responsive - móvil pequeño */
-  .projects-page {
-    margin-top: 110px;
-    padding: 0 10px;
-  }
-
-  .projects-main {
-    padding: 1em 0.5em;
-  }
-
-  .projects-main__heading {
-    font-size: 1.4em;
-    margin-bottom: 1em;
-  }
-
-  .cards__inner {
-    gap: 1.2em;
-  }
-
-  .card {
-    padding: 1.2em 1.5em;
-  }
-
-  .card__heading {
-    font-size: 1.3em;
-  }
-
-  .card__description {
-    font-size: 0.9em;
-  }
-
-  .cta {
-    padding: 0.7em 1em;
-    font-size: 0.9rem;
-  }
-}
-
-/* ===== home.css ajustes móviles ===== */
-@media (max-width: 768px) {
-  .contentFrame .container {
-    margin-top: 15vh;
-    padding: 0 15px;
-  }
-
-  .contentFrame h1 {
-    font-size: 3rem;
-  }
-
-  .contentFrame h2 {
-    font-size: 1.3rem;
-  }
-
-  .skills-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
-  }
-}
-
-@media (max-width: 600px) {
-  .contentFrame .container {
-    margin-top: 10vh;
-    /* espacio extra para navbar */
-    padding: 0 10px;
-  }
-
-  .contentFrame h1 {
-    font-size: 2.2rem;
-  }
-
-  .contentFrame h2 {
-    font-size: 1.1rem;
-    line-height: 1.4;
-  }
-
-  .contentFrame p {
-    font-size: 1rem;
-  }
-
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-  }
-
-  .button {
-    width: 90%;
-    max-width: 280px;
-    justify-content: center;
-  }
-
-  .skills-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 10px;
-    margin: 30px auto;
-  }
-
-  .skill-category {
-    padding: 20px;
-  }
-
-  .skill-category img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .skill-category h3 {
-    font-size: 1.3rem;
-  }
-
-  .tag {
-    font-size: 0.8rem;
-    padding: 4px 10px;
-  }
-
-  /* Certificates Carousel Responsive */
-  .certificates-section {
-    padding: 0 10px 30px;
-    margin-top: 40px;
-  }
-
-  .certificates-section h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-
-  .certificates-carousel {
-    padding: 15px;
-    overflow: hidden; /* Prevenir scroll horizontal */
-  }
-
-  .carousel-container {
-    height: 500px;
-  }
-
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-  }
-
-  .carousel-prev {
-    left: 5px; /* Dentro del contenedor */
-  }
-
-  .carousel-next {
-    right: 5px; /* Dentro del contenedor */
-  }
-  
-  .certificates-section {
-    overflow-x: hidden; /* Prevenir scroll horizontal */
-    padding: 0 15px 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contentFrame .container {
-    margin-top: 8vh;
-    padding: 0 8px;
-  }
-
-  .contentFrame h1 {
-    font-size: 1.8rem;
-  }
-
-  .contentFrame h2 {
-    font-size: 1rem;
-  }
-
-  .contentFrame p {
-    font-size: 0.9rem;
-  }
-
-  .button {
-    font-size: 0.9rem;
-    padding: 10px 20px;
-  }
-
-  .skill-category {
-    padding: 15px;
-  }
-
-  .skill-category h3 {
-    font-size: 1.1rem;
-  }
-
-  /* Certificates Carousel - Mobile Small */
-  .certificates-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-
-  .certificates-carousel {
-    padding: 10px;
-    overflow: hidden; /* Prevenir scroll horizontal */
-  }
-
-  .carousel-container {
-    height: 400px;
-  }
-
-  .carousel-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-  }
-
-  .carousel-prev {
-    left: 5px; /* Dentro del contenedor */
-  }
-
-  .carousel-next {
-    right: 5px; /* Dentro del contenedor */
-  }
-
-  .carousel-indicator {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .certificates-section {
-    overflow-x: hidden; /* Prevenir scroll horizontal */
-    padding: 0 10px 30px;
-  }
-}
-
-/* ===== contact.css ajustes móviles ===== */
-@media (max-width: 768px) {
-  .contact-section {
-    margin-top: 150px;
-    padding: 40px 20px;
-  }
-
-  .contact-card {
-    width: 85%;
-    padding: 20px;
-  }
-
-  .contact-card img {
-    width: 90px;
-    height: 90px;
-  }
-
-  .contact-form {
-    max-width: 100%;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 95%;
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .contact-form button {
-    width: 95%;
-    max-width: 300px;
-    padding: 12px 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-section {
-    margin-top: 160px;
-    /* navbar fijo */
-    padding: 30px 10px;
-  }
-
-  .contact-section h1 {
-    font-size: 1.8rem;
-  }
-
-  .contact-section h2 {
-    font-size: 1.3rem;
-  }
-
-  .contact-card {
-    width: 95%;
-    padding: 15px;
-  }
-
-  .contact-card img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .contact-form {
-    max-width: 100%;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 95%;
-    font-size: 14px;
-    padding: 12px;
-  }
-
-  .contact-form button {
-    width: 90%;
-    max-width: 250px;
-    padding: 12px 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-section {
-    margin-top: 170px;
-    padding: 25px 8px;
-  }
-
-  .contact-section h1 {
-    font-size: 1.7rem;
-  }
-
-  .contact-section h2 {
-    font-size: 1.2rem;
-  }
-
-  .contact-card {
-    width: 100%;
-    padding: 12px;
-  }
-
-  .contact-card img {
-    width: 70px;
-    height: 70px;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .contact-form button {
-    width: 100%;
-    font-size: 14px;
-  }
-}
-
-
-/* ===== chatbot.css ajustes móviles ===== */
+/* ============================================= */
+/* ===== RESPONSIVE UNIFICADO Y CORREGIDO  ===== */
+/* ============================================= */
+
+/* --- TABLETS (1024px o menos) --- */
 @media (max-width: 1024px) {
-  /* Ajustar margin-top del contentFrame cuando contiene chatbot para evitar que navbar lo tape */
-  .contentFrame.chatbot-page {
-    margin-top: 140px !important;
-    padding-top: 10px;
+  :root {
+    --navbar-height: 140px;
   }
 
+  /* Chatbot Fix: Evita colisión lateral */
   .chatbot-wrapper {
-    flex-direction: row; /* Mantener en fila para que el sidebar se deslice */
-    align-items: stretch;
-    gap: 0; /* Sin gap cuando está fuera */
-    margin-top: 0;
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    overflow-x: hidden; /* Evitar scroll horizontal */
-    overflow: visible !important; /* Permitir que el sidebar se sobreponga */
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 20px;
   }
 
-  /* Asegurar que el sidebar no esté limitado por el contenedor padre */
-  .contentFrame {
-    overflow: visible !important; /* Permitir que el sidebar se sobreponga */
-  }
-
-  /* Botón toggle visible y posicionado en el chatbot container */
   .chatbot-container {
-    position: relative;
+    width: 100%;
+    margin: 0;
   }
 
-  .questions-toggle {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1201; /* Por encima del navbar pero debajo del sidebar */
-    margin-bottom: 0;
+  .contact-section, .projects-page {
+    max-width: 90vw; /* Cambiado de 50vw para legibilidad */
+  }
+}
+
+/* --- MÓVILES (768px o menos) --- */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 160px;
   }
 
-  /* Sidebar como slideout desde la izquierda - igual que el menú */
+  /* Fix Chatbot Sidebar: Estilo Menú Slideout */
   .questions-sidebar {
     position: fixed !important;
     top: 0 !important;
-    left: -100% !important; /* Fuera de pantalla, igual que el menú (right: -100%) */
-    width: 280px !important;
-    min-width: 280px !important;
+    left: -100% !important;
+    width: 80% !important;
+    max-width: 300px !important;
     height: 100vh !important;
-    min-height: 100vh !important;
-    max-height: 100vh !important;
-    padding: 20px 20px 20px 20px !important; /* Reducir padding superior para que el botón no se oculte */
-    padding-top: 70px !important; /* Espacio para el botón de cerrar */
-    margin: 0 !important;
+    z-index: 2000 !important; /* Por encima de todo */
+    background: var(--card-bg) !important;
+    transition: left 0.3s ease-in-out !important;
     border-radius: 0 !important;
-    border-right: 2px solid var(--hover-bg, #8f50f5c0) !important;
-    z-index: 1100 !important; /* Mismo z-index que el menú */
-    overflow-y: auto !important;
-    overflow-x: hidden !important; /* Evitar scroll horizontal */
-    transition: left 0.3s ease !important; /* Transición con left, igual que el menú usa right */
-    display: flex !important;
-    flex-direction: column !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    background: var(--card-bg, #2a2a3b) !important;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3) !important; /* Sombra para efecto de sobreposición */
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    padding-top: 80px !important;
   }
 
-  /* Sidebar abierto - se desliza hacia dentro */
   .questions-sidebar.active {
-    left: 0 !important; /* Igual que el menú usa right: 0 */
+    left: 0 !important;
   }
 
-  /* Ocultar h3 en móvil */
-  .questions-sidebar h3 {
-    display: none !important;
-  }
-
-  /* Botón de cerrar visible cuando sidebar está activo */
-  .questions-sidebar.active .close-questions-btn,
-  .close-questions-btn {
+  /* Toggle Button para Chatbot */
+  .questions-toggle {
     display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Asegurar posición correcta del botón dentro del sidebar - X negra simple */
-  .questions-sidebar.active .close-questions-btn {
-    left: 250px !important; /* Posicionado desde la izquierda del sidebar */
-    width: auto !important;
-    height: auto !important;
-    font-size: 32px !important;
-    top: 15px !important;
-    border: none !important;
-    background: transparent !important;
-    color: #000 !important;
-    padding: 5px !important;
+    margin-bottom: 15px;
+    width: fit-content;
   }
 
-  .questions-list {
+  /* Contact & Projects: Apilado Vertical */
+  .contact__methods, .cards__inner {
     flex-direction: column;
-    gap: 10px;
-    margin-top: 0;
-    padding-top: 20px;
+    align-items: center;
+    gap: 20px;
   }
 
-  .question-btn {
-    text-align: left;
-    width: 100%;
-    padding: 14px 15px;
-    font-size: 0.95rem;
-  }
-
-  /* Chatbot container ocupa todo el ancho en móvil */
-  .chatbot-container {
-    width: 100%;
-    margin-left: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: margin-left 0.3s ease;
-    box-sizing: border-box;
-  }
-
-  /* Botón de cerrar visible en móvil cuando sidebar está activo */
-  .questions-sidebar.active .close-questions-btn {
-    display: flex !important;
+  .contact__method, .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0;
   }
 }
 
-@media (max-width: 768px) {
-  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
-  .contentFrame.chatbot-page {
-    margin-top: 140px !important;
-    padding-top: 10px;
-  }
-
-  .chatbot-wrapper {
-    margin-top: 0;
-    padding: 0 10px;
-    gap: 12px;
-  }
-
-  .questions-toggle {
-    padding: 14px 15px;
-    font-size: 1rem;
-  }
-
-  .chatbot-container {
-    padding: 15px;
-    width: 100%;
-    min-height: auto;
-  }
-
-  .chat-header {
-    font-size: 16px;
-    padding: 10px;
-  }
-
-  .chat-box {
-    max-height: 400px;
-    min-height: 300px;
-    padding: 15px;
-  }
-
-  /* Solo ajustar padding, no las propiedades críticas del sidebar */
-  .questions-sidebar {
-    padding-top: 70px !important; /* Mantener espacio para botón cerrar */
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    padding-bottom: 20px !important;
-  }
-
-  .questions-sidebar h3 {
-    font-size: 1.1rem;
-  }
-
-  .questions-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
-  .contentFrame.chatbot-page {
-    margin-top: 150px !important;
-    padding-top: 10px;
-  }
-
-  .chatbot-wrapper {
-    margin-top: 0;
-    padding: 0 8px;
-    gap: 10px;
-  }
-
-  .questions-sidebar {
-    padding: 70px 15px 15px 15px !important; /* Mantener padding superior */
-    min-height: 100vh !important; /* Mantener altura completa */
-  }
-
-  .questions-toggle {
-    padding: 12px 15px;
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-  }
-
-  .questions-toggle .toggle-icon {
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
-
-  .chatbot-container {
-    padding: 12px;
-    min-height: auto;
-    width: 100%;
-  }
-
-  .chat-header {
-    font-size: 15px;
-    padding: 10px;
-  }
-
-  .chat-box {
-    max-height: 350px;
-    min-height: 250px;
-    padding: 12px;
-  }
-
-  .question-btn {
-    padding: 12px 14px;
-    font-size: 0.9rem;
-  }
-}
-
+/* --- MÓVILES PEQUEÑOS (480px o menos) --- */
 @media (max-width: 480px) {
-  /* Ajustar margin-top del contentFrame cuando contiene chatbot */
-  .contentFrame.chatbot-page {
-    margin-top: 160px !important;
-    padding-top: 10px;
-  }
-
-  .chatbot-wrapper {
-    margin-top: 0;
-    padding: 0 5px;
-    gap: 8px;
-  }
-
-  .questions-sidebar {
-    padding: 80px 12px 12px 12px !important; /* Más padding superior para el botón más grande */
-  }
-
-  .questions-toggle {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-  }
-  
-  /* Botón de cerrar X negra simple en pantallas pequeñas */
-  .close-questions-btn {
-    width: auto !important;
-    height: auto !important;
-    font-size: 28px !important;
-    top: 12px !important;
-    left: 245px !important;
-    border: none !important;
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    padding: 5px !important;
-  }
-
-  .chatbot-container {
-    padding: 10px;
-  }
-
-  .chatbot-container {
-    padding: 12px;
-  }
-
-  .chat-header {
-    font-size: 14px;
-    padding: 8px;
+  :root {
+    --navbar-height: 170px; /* Navbar apilado en móviles muy pequeños */
   }
 
   .chat-box {
-    max-height: 300px;
-    min-height: 200px;
-    padding: 10px;
+    height: 350px; /* Altura fija para evitar que se pierda el input */
   }
+
+  .contact-form {
+    padding: 20px 15px;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+
+  /* Prevenir desbordamiento de certificados */
+  .certificates-carousel {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+/* --- HELPER: Bloqueo de Scroll cuando Sidebar está activo --- */
+body.menu-open, body.sidebar-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
 }
