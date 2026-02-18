@@ -1,7 +1,7 @@
-/* === projects.css - Estilos para tarjetas de proyectos con efecto de puntero iluminado === */
+/* === projects.css Optimizado - Error de botones corregido === */
 
 .projects-page {
-  overflow-x: hidden; /* Prevenir scroll horizontal */
+  overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
 }
@@ -33,6 +33,7 @@
   justify-content: center;
 }
 
+/* Tarjeta Base */
 .card {
   --flow-space: 0.5em;
   --hsl: var(--hue), var(--saturation), var(--lightness);
@@ -51,95 +52,73 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  z-index: 0;
+  z-index: 1; /* Elevado para asegurar clics */
 }
 
-/* Colores diferentes para cada tarjeta */
-.card:nth-child(1) {
-  --hue: 165;
-  --saturation: 82.26%;
-  --lightness: 51.37%;
-}
-
-.card:nth-child(2) {
-  --hue: 291.34;
-  --saturation: 95.9%;
-  --lightness: 61.76%;
-}
-
-.card:nth-child(3) {
-  --hue: 338.69;
-  --saturation: 100%;
-  --lightness: 48.04%;
-}
+/* Colores originales preservados */
+.card:nth-child(1) { --hue: 165; --saturation: 82.26%; --lightness: 51.37%; }
+.card:nth-child(2) { --hue: 291.34; --saturation: 95.9%; --lightness: 61.76%; }
+.card:nth-child(3) { --hue: 338.69; --saturation: 100%; --lightness: 48.04%; }
 
 .card__heading {
   font-size: 1.5em;
   font-weight: 600;
-  color: var(--text-color);
   margin: 0;
   line-height: 1.2;
-  word-wrap: break-word;
 }
 
 .card__description {
   font-size: 1em;
-  color: var(--text-color);
   opacity: 0.8;
   margin: 0;
   font-style: italic;
   line-height: 1.4;
-  word-wrap: break-word;
 }
 
 .card__bullets {
   line-height: 1.6;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 .card__bullets li {
   margin-bottom: 0.5em;
-  color: var(--text-color);
-  line-height: 1.6;
-  word-wrap: break-word;
+  display: flex;
+  align-items: flex-start;
 }
 
 .card__bullets li::before {
+  content: "";
   display: inline-block;
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%238f50f5'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
-  transform: translateY(0.25ch);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
   margin-right: 1ch;
+  margin-top: 0.2em;
+  background-color: #8f50f5;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E") no-repeat center;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E") no-repeat center;
 }
 
-/* Ajustar color del checkmark según el tema */
 .light-theme .card__bullets li::before {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%23673ab7'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
-}
-
-.flow > * + * {
-  margin-top: var(--flow-space, 1.25em);
+  background-color: #673ab7;
 }
 
 .cta {
   display: block;
   align-self: end;
-  margin: 1em 0 0.5em 0;
+  margin-top: 1em;
   text-align: center;
   text-decoration: none;
   color: #fff;
   background-color: var(--hover-bg);
   padding: 0.8em 1.2em;
   border-radius: 10px;
-  font-size: 1rem;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
+  transition: all 0.3s ease;
   position: relative;
-  z-index: 0;
+  z-index: 10; /* Prioridad de clic */
 }
 
 .cta:hover {
@@ -147,136 +126,45 @@
   transform: translateY(-2px);
 }
 
-.cta:active {
-  transform: translateY(0);
-}
-
-/* Asegurar que los botones del overlay no tengan efectos hover */
-.overlay .cta:hover {
-  transform: none !important;
-  background-color: hsl(var(--hsl)) !important;
-}
-
-/* Overlay para el efecto de puntero iluminado */
-.cards .overlay {
+/* === Lógica del Overlay (Brillo) === */
+.projects-main__cards .overlay {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none; /* Crucial: No bloquea clics */
   user-select: none;
   opacity: var(--opacity, 0);
-  -webkit-mask: radial-gradient(
-    25rem 25rem at var(--x) var(--y),
-    #000 1%,
-    transparent 50%
-  );
-  mask: radial-gradient(
-    25rem 25rem at var(--x) var(--y),
-    #000 1%,
-    transparent 50%
-  );
-  transition: 400ms mask ease;
-  will-change: mask;
-  overflow: visible;
+  -webkit-mask: radial-gradient(25rem circle at var(--x) var(--y), #000 1%, transparent 50%);
+  mask: radial-gradient(25rem circle at var(--x) var(--y), #000 1%, transparent 50%);
+  transition: 400ms opacity ease;
   z-index: 2;
 }
 
 .overlay .card {
   background-color: hsla(var(--hsl), 0.15);
-  border-color: hsla(var(--hsl), 1);
+  border-color: hsl(var(--hsl));
   box-shadow: 0 0 0 1px inset hsl(var(--hsl)), 0 8px 25px hsla(var(--hsl), 0.3);
   position: absolute;
-  pointer-events: none;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  padding: 1.5em 2em;
-  border-radius: 15px;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-rows: auto auto auto 1fr auto;
-  align-items: start;
-  gap: 1.25em;
-  margin: 0;
-  flex: none;
-  font-family: Arial, sans-serif;
-  color: var(--text-color);
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  transform: none !important;
-}
-
-/* Asegurar que todos los elementos de texto del overlay tengan las mismas propiedades */
-.overlay .card * {
-  font-family: inherit;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Excepción para botones CTA del overlay - no aplicar estilos de texto duplicados */
-.overlay .card .cta {
-  font-family: Arial, sans-serif;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-.overlay .cta {
-  display: block;
-  grid-row: -1;
-  width: 100%;
-  background-color: hsl(var(--hsl)) !important;
-  box-shadow: 0 0 0 1px hsl(var(--hsl));
-  margin: 1em 0 0.5em 0;
-  padding: 0.8em 1.2em;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  cursor: pointer;
-  transform: none !important;
-  position: static !important;
+  margin: 0;
   z-index: 1;
-  transition: none !important;
-  align-self: end;
-  box-sizing: border-box;
-  margin: 1em 0 0.5em 0 !important;
 }
 
-/* Efecto hover normal - deshabilitado cuando el overlay está activo */
-.cards__inner > .card {
-  transition: 400ms background ease;
-  will-change: background;
+/* Deshabilitar botones fantasma en el overlay */
+.overlay .cta {
+  background-color: hsl(var(--hsl)) !important;
+  pointer-events: none; /* El botón brillante no se puede clickear */
+  visibility: visible;
 }
 
-.cards__inner > .card:not(:hover) {
-  transform: none;
-}
-
-.cards__inner > .card:hover {
-  --lightness: 95%;
-  background: hsla(var(--hsl), 0.1);
-}
-
-/* Cuando el overlay está activo, deshabilitar transform en las tarjetas originales */
-.projects-main__cards[data-overlay-active="true"] .cards__inner > .card:hover {
-  transform: none !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Ajustes para tema claro */
+/* Tema Claro */
 .light-theme .card {
-  border-color: rgba(143, 80, 245, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-color: rgba(143, 80, 245, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .light-theme .overlay .card {
-  box-shadow: 0 0 0 1px inset hsl(var(--hsl)), 0 8px 25px hsla(var(--hsl), 0.2);
+  box-shadow: 0 0 0 1px inset hsl(var(--hsl)), 0 8px 25px hsla(var(--hsl), 0.15);
 }
-
-.light-theme :not(.overlay) > .card:hover {
-  box-shadow: 0 8px 25px rgba(143, 80, 245, 0.2);
-}
-
