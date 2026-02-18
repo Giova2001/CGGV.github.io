@@ -1,21 +1,23 @@
-/* === chatbot.css Optimizado === */
+/* === chatbot.css Verificado y Corregido === */
 
 :root {
   --chat-purple-dark: #6a0dad;
   --chat-purple-light: #a64ca6;
   --chat-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --chat-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --chat-overlay-bg: rgba(0, 0, 0, 0.7); /* Corregido nombre variable */
 }
 
 /* Wrapper Principal */
 .chatbot-wrapper {
   display: flex;
-  align-items: stretch; /* Asegura altura igual para ambas columnas */
+  align-items: stretch;
   gap: 25px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 }
 
 /* Sidebar de Preguntas Sugeridas */
@@ -30,6 +32,38 @@
   flex-direction: column;
   transition: var(--chat-transition);
   border: 1px solid rgba(143, 80, 245, 0.2);
+  z-index: 1001;
+}
+
+/* Botón Cerrar (ID: closeQuestionsBtn) - Corregido nombres */
+#closeQuestionsBtn {
+  display: none; /* Se activa por JS o en media query */
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: var(--text-color, #fff);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 5px;
+  line-height: 1;
+}
+
+/* Overlay (ID: questionsOverlay) - Corregido nombres */
+#questionsOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--chat-overlay-bg);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+#questionsOverlay.active {
+  display: block;
 }
 
 .questions-sidebar h3 {
@@ -38,7 +72,6 @@
   font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
   text-align: center;
   padding-bottom: 12px;
   border-bottom: 2px solid var(--chat-purple-light);
@@ -49,30 +82,24 @@
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
-  padding-right: 5px;
 }
-
-/* Scrollbar estilizado para la lista */
-.questions-list::-webkit-scrollbar { width: 5px; }
-.questions-list::-webkit-scrollbar-thumb { background: var(--chat-purple-light); border-radius: 10px; }
 
 /* Botones de Pregunta */
 .question-btn {
   background: var(--hover-bg, rgba(143, 80, 245, 0.15));
   color: var(--text-color, #fff);
   border: 1px solid transparent;
-  padding: 14px;
+  padding: 12px 15px;
   border-radius: 10px;
   cursor: pointer;
   transition: var(--chat-transition);
   text-align: left;
   font-size: 0.9rem;
-  line-height: 1.4;
 }
 
-.question-btn:hover {
+.question-btn:hover:not(:disabled) {
   background: var(--chat-purple-light);
-  transform: translateX(8px);
+  transform: translateX(5px);
   border-color: #fff;
 }
 
@@ -81,27 +108,25 @@
   flex: 2;
   background: var(--bg-color, #1e1e2e);
   border-radius: 16px;
-  padding: 0; /* Limpiamos padding para que el header toque los bordes */
   box-shadow: var(--chat-shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(143, 80, 245, 0.2);
+  min-height: 600px;
 }
 
 .chat-header {
   background: linear-gradient(135deg, var(--chat-purple-light), var(--chat-purple-dark));
-  padding: 16px;
+  padding: 20px;
   text-align: center;
   font-weight: 700;
-  letter-spacing: 0.5px;
   color: #fff;
 }
 
 .chat-box {
-  background: transparent;
+  flex: 1;
   padding: 20px;
-  height: 500px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -115,7 +140,6 @@
   max-width: 80%;
   font-size: 0.95rem;
   line-height: 1.5;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .bot-msg {
@@ -133,7 +157,7 @@
   border-bottom-right-radius: 2px;
 }
 
-/* Área de Entrada */
+/* Área de Entrada (ID: send-btn, user-input) */
 .chat-input {
   padding: 20px;
   background: var(--card-bg, #2a2a3b);
@@ -142,22 +166,21 @@
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-.chat-input input {
+#user-input {
   flex: 1;
   padding: 12px 16px;
   border-radius: 12px;
   border: 2px solid transparent;
   background: var(--bg-color, #1e1e2e);
   color: var(--text-color, #fff);
-  transition: var(--chat-transition);
+  outline: none;
 }
 
-.chat-input input:focus {
-  outline: none;
+#user-input:focus {
   border-color: var(--chat-purple-light);
 }
 
-.chat-input button {
+#send-btn {
   background: var(--chat-purple-light);
   border: none;
   width: 48px;
@@ -165,19 +188,11 @@
   border-radius: 12px;
   cursor: pointer;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: var(--chat-transition);
 }
 
-.chat-input button:hover:not(:disabled) {
-  background: var(--chat-purple-dark);
-  transform: rotate(10deg) scale(1.1);
-}
-
-/* Botón Toggle para Móvil */
-.questions-toggle {
+/* Botón Toggle Móvil (ID: questionsToggle) */
+#questionsToggle {
   display: none;
   width: 100%;
   background: var(--chat-purple-light);
@@ -187,21 +202,20 @@
   font-weight: bold;
   border-radius: 12px;
   margin-bottom: 15px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* === Media Queries (Responsividad Total) === */
+/* === Media Queries Corregidas === */
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .chatbot-wrapper {
     flex-direction: column;
     padding: 10px;
   }
 
-  .questions-toggle {
+  #questionsToggle {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
   }
 
   .questions-sidebar {
@@ -210,22 +224,16 @@
     left: -100%;
     width: 280px;
     height: 100vh;
-    z-index: 1000;
     border-radius: 0;
-    transition: left 0.4s cubic-bezier(0.77,0,0.175,1);
+    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
   }
 
   .questions-sidebar.active {
     left: 0;
   }
 
-  .close-questions-btn {
-    display: flex !important;
-  }
-
-  .chatbot-container {
-    width: 100%;
-    height: 70vh;
+  #closeQuestionsBtn {
+    display: block; /* Ahora sí se ve en móvil */
   }
 }
 
