@@ -29,7 +29,7 @@ export function initCertificatesCarousel() {
     for (let i = 1; i <= maxFiles; i++) {
       const num = i.toString().padStart(2, '0'); // 01, 02, 03, etc.
       const filePath = `image/certs/${num}.pdf`;
-      
+
       try {
         const response = await fetch(filePath, { method: 'HEAD' });
         if (response.ok) {
@@ -59,7 +59,7 @@ export function initCertificatesCarousel() {
   async function loadCarousel() {
     try {
       const availableFiles = await findCertFiles();
-      
+
       if (availableFiles.length === 0) {
         console.warn(" No se encontraron archivos PDF en image/certs/");
         carouselContainer.innerHTML = '<p class="no-certificates">No hay certificados disponibles</p>';
@@ -79,7 +79,6 @@ export function initCertificatesCarousel() {
         // Crear slide del carrusel
         const slide = document.createElement('div');
         slide.className = 'carousel-slide';
-        // Agregar clase active al primer slide
         if (index === 0) {
           slide.classList.add('active');
         }
@@ -88,51 +87,41 @@ export function initCertificatesCarousel() {
         slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
         slide.id = `slide-${index}`;
 
-        // Crear contenedor del PDF
         const pdfContainer = document.createElement('div');
         pdfContainer.className = 'pdf-container';
 
-        // Crear iframe para mostrar el PDF (sin permitir descarga)
+        // Crear iframe con Lazy Loading para móviles
         const iframe = document.createElement('iframe');
-        // Agregar parámetros para ocultar la barra de herramientas del PDF viewer y prevenir descarga
-        // toolbar=0: oculta barra de herramientas
-        // navpanes=0: oculta paneles de navegación
-        // scrollbar=1: permite scrollbar
-        iframe.src = file.path + '#toolbar=0&navpanes=0&scrollbar=1';
         iframe.className = 'pdf-viewer';
         iframe.setAttribute('title', `Certificado ${index + 1}`);
         iframe.setAttribute('aria-label', `Certificado ${index + 1}`);
-        
-        // Prevenir clic derecho en el contenedor del PDF
+
+        // PARÁMETROS DE PDF
+        const pdfParams = '#toolbar=0&navpanes=0&scrollbar=1';
+
+        // Solo cargamos el primer PDF de inmediato, los demás bajo demanda
+        if (index === 0) {
+          iframe.src = file.path + pdfParams;
+        } else {
+          // Guardamos la ruta en un atributo de datos para cargarla luego
+          iframe.setAttribute('data-src', file.path + pdfParams);
+        }
+
+        // Bloqueos de seguridad (clic derecho, arrastrar, etc.)
         pdfContainer.addEventListener('contextmenu', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          return false;
         }, true);
 
-        // Prevenir arrastrar y soltar archivos
-        pdfContainer.addEventListener('dragstart', (e) => {
-          e.preventDefault();
-          return false;
-        }, true);
-        
-        pdfContainer.addEventListener('drag', (e) => {
-          e.preventDefault();
-          return false;
-        }, true);
-
-        // Prevenir selección de texto
-        pdfContainer.addEventListener('selectstart', (e) => {
-          e.preventDefault();
-          return false;
-        }, true);
+        pdfContainer.addEventListener('dragstart', (e) => e.preventDefault(), true);
+        pdfContainer.addEventListener('selectstart', (e) => e.preventDefault(), true);
 
         pdfContainer.appendChild(iframe);
-        
-        // Agregar overlay para prevenir interacciones directas (no bloquea el scroll del iframe)
+
         const overlay = document.createElement('div');
         overlay.className = 'pdf-overlay';
         overlay.setAttribute('title', 'La descarga está deshabilitada');
+
         pdfContainer.appendChild(overlay);
         slide.appendChild(pdfContainer);
         carouselContainer.appendChild(slide);
@@ -144,6 +133,8 @@ export function initCertificatesCarousel() {
         indicator.setAttribute('aria-label', `Ir al certificado ${index + 1}`);
         indicator.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
         indicator.setAttribute('tabindex', index === 0 ? '0' : '-1');
+        if (index === 0) indicator.classList.add('active');
+
         indicator.addEventListener('click', () => goToSlide(index));
         carouselIndicators.appendChild(indicator);
       });
@@ -152,9 +143,9 @@ export function initCertificatesCarousel() {
       let currentSlide = 0;
       const totalSlides = availableFiles.length;
       let autoPlayInterval = null;
-      const AUTO_PLAY_DELAY = 5000; // 5 segundos entre cambios automáticos
+      const AUTO_PLAY_DELAY = 5000;
 
-      // Función para actualizar el carrusel
+      // Función para actualizar el carrusel (INCLUYE CARGA DINÁMICA)
       function updateCarousel() {
         const slides = carouselContainer.querySelectorAll('.carousel-slide');
         const indicators = carouselIndicators.querySelectorAll('.carousel-indicator');
@@ -163,6 +154,16 @@ export function initCertificatesCarousel() {
           const isActive = index === currentSlide;
           slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
           slide.classList.toggle('active', isActive);
+
+          // LOGICA DE CARGA DINÁMICA: Si el slide es el activo, cargar el iframe si no tiene src
+          if (isActive) {
+            const iframe = slide.querySelector('.pdf-viewer');
+            const dataSrc = iframe.getAttribute('data-src');
+            if (dataSrc && !iframe.src) {
+              console.log(`Cargando certificado ${index + 1} para móvil...`);
+              iframe.src = dataSrc;
+            }
+          }
         });
 
         indicators.forEach((indicator, index) => {
@@ -172,17 +173,12 @@ export function initCertificatesCarousel() {
           indicator.classList.toggle('active', isActive);
         });
 
-        // Actualizar visibilidad de botones
         prevBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
         nextBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
       }
 
-      // Función para iniciar el auto-play
       function startAutoPlay() {
-        // Limpiar intervalo anterior si existe
         stopAutoPlay();
-        
-        // Solo iniciar auto-play si hay más de un slide
         if (totalSlides > 1) {
           autoPlayInterval = setInterval(() => {
             nextSlide();
@@ -190,7 +186,6 @@ export function initCertificatesCarousel() {
         }
       }
 
-      // Función para detener el auto-play
       function stopAutoPlay() {
         if (autoPlayInterval) {
           clearInterval(autoPlayInterval);
@@ -198,52 +193,36 @@ export function initCertificatesCarousel() {
         }
       }
 
-      // Función para reiniciar el auto-play (después de interacción manual)
       function restartAutoPlay() {
         stopAutoPlay();
-        // Reiniciar después de un pequeño delay para que el usuario vea el cambio manual
-        setTimeout(() => {
-          startAutoPlay();
-        }, 1000);
+        setTimeout(() => startAutoPlay(), 1000);
       }
 
-      // Función para ir a un slide específico
       function goToSlide(index) {
         if (index < 0 || index >= totalSlides) return;
         currentSlide = index;
         updateCarousel();
-        restartAutoPlay(); // Reiniciar auto-play después de cambio manual
+        restartAutoPlay();
       }
 
-      // Función para ir al siguiente slide
       function nextSlide() {
         currentSlide = (currentSlide + 1) % totalSlides;
         updateCarousel();
       }
 
-      // Función para ir al slide anterior
       function prevSlide() {
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         updateCarousel();
-        restartAutoPlay(); // Reiniciar auto-play después de cambio manual
+        restartAutoPlay();
       }
 
-      // Obtener el contenedor del carrusel para eventos de hover
+      // Event Listeners
       const certificatesCarousel = document.getElementById('certificatesCarousel');
-
-      // Pausar auto-play cuando el usuario interactúa con el carrusel
       if (certificatesCarousel) {
-        certificatesCarousel.addEventListener('mouseenter', () => {
-          stopAutoPlay();
-        });
-
-        // Reanudar auto-play cuando el usuario deja de interactuar
-        certificatesCarousel.addEventListener('mouseleave', () => {
-          startAutoPlay();
-        });
+        certificatesCarousel.addEventListener('mouseenter', stopAutoPlay);
+        certificatesCarousel.addEventListener('mouseleave', startAutoPlay);
       }
 
-      // Event listeners
       nextBtn.addEventListener('click', () => {
         nextSlide();
         restartAutoPlay();
@@ -254,7 +233,6 @@ export function initCertificatesCarousel() {
         restartAutoPlay();
       });
 
-      // Navegación con teclado
       carouselContainer.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
           e.preventDefault();
@@ -269,18 +247,14 @@ export function initCertificatesCarousel() {
 
       // Inicializar carrusel
       updateCarousel();
-      
-      // Iniciar auto-play
       startAutoPlay();
 
-      console.log(" Carrusel de certificados inicializado correctamente");
+      console.log(" Carrusel de certificados inicializado correctamente con Lazy Loading");
     } catch (error) {
       console.error(" Error al cargar el carrusel:", error);
       carouselContainer.innerHTML = '<p class="error-certificates">Error al cargar los certificados. Por favor, recarga la página.</p>';
     }
   }
-
   // Iniciar carga
   loadCarousel();
 }
-

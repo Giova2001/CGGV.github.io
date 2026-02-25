@@ -31,6 +31,17 @@
     --navbar-height: 160px;
   }
 
+  /* Ocultar la foto de perfil en el menú deslizante */
+  .menu-slideout img {
+    display: none !important;
+  }
+
+  /* Ajuste opcional: Si el menú queda muy arriba al quitar la foto, 
+     puedes añadir margen al nav */
+  .menu-slideout nav {
+    margin-top: 20px;
+  }
+  
   /* Fix Chatbot Sidebar: Estilo Menú Slideout */
   .questions-sidebar {
     position: fixed !important;
