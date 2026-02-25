@@ -55,7 +55,7 @@ export function initCertificatesCarousel() {
 
         const iframe = document.createElement('iframe');
         iframe.className = 'pdf-viewer';
-        const pdfParams = '#toolbar=0&navpanes=0&scrollbar=1';
+        const pdfParams = '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
 
         // Lazy Loading: Solo el primero tiene src real
         if (index === 0) {
@@ -102,6 +102,34 @@ export function initCertificatesCarousel() {
         });
       }
 
+      // 1. Manejo inteligente del cambio de tamaño (Debounce)
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // Forzamos al navegador a repintar el contenedor
+          const container = document.getElementById('carouselContainer');
+          if (container) {
+            updateCarousel();
+            console.log("Vista móvil adaptada");
+          }
+        }, 250);
+      });
+
+      // 2. Soporte para gestos (Swipe) - Crucial para móviles
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      carouselContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) nextSlide(); // Deslizar izquierda
+        if (touchEndX - touchStartX > 50) prevSlide(); // Deslizar derecha
+      }, { passive: true });
+
       function goToSlide(index) {
         currentSlide = index;
         updateCarousel();
@@ -122,7 +150,7 @@ export function initCertificatesCarousel() {
       prevBtn.addEventListener('click', prevSlide);
 
       // --- SOLUCIÓN AL CAMBIO DE VENTANAS (SPA) ---
-      
+
       // 1. Detectar cuando el elemento se vuelve visible (cambio de sección)
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

@@ -132,12 +132,10 @@
 
 /* ===== Certificates Carousel ===== */
 .certificates-section {
-  margin-top: 60px;
-  padding: 0 20px 40px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
   box-sizing: border-box;
   overflow-x: hidden; /* Prevenir scroll horizontal */
 }
@@ -152,11 +150,10 @@
 .certificates-carousel {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   background-color: var(--card-bg);
+  margin: 0 auto;
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   overflow: hidden; /* Prevenir que los botones salgan del contenedor */
@@ -165,30 +162,35 @@
 .carousel-container {
   position: relative;
   width: 100%;
-  height: 600px;
+  aspect-ratio: 4 / 3;
+  min-width: 250px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: var(--bg-color);
+}
+
+@media (min-width: 768px) {
+  .carousel-container {
+    aspect-ratio: 16 / 9;
+    height: 550px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 }
 
 .carousel-slide {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0; /* Top, Right, Bottom, Left = 0 */
   width: 100%;
-  min-width: 400px;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
   display: none;
-  align-items: center;
-  justify-content: center;
+  transition: opacity 0.4s ease;
 }
 
 .carousel-slide.active {
   opacity: 1;
-  position: relative;
-  display: block;
+  display: flex;
 }
 
 .carousel-slide[aria-hidden="true"] {
@@ -213,8 +215,7 @@
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 8px;
-  background-color: #fff;
+  /* Importante para móviles: evita que el iframe bloquee el scroll de la página */
   pointer-events: auto;
   /* Prevenir selección de texto */
   -webkit-user-select: none;
@@ -240,22 +241,23 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--hover-bg);
-  color: var(--text-color);
-  border: none;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(103, 58, 183, 0.8);
+  backdrop-filter: blur(4px);
+  font-size: 1.5rem;
+  z-index: 5;
   border-radius: 50%;
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  /* Mantener botones dentro del contenedor */
+}
+
+@media (max-width: 480px) {
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  .carousel-prev { left: 5px; }
+  .carousel-next { right: 5px; }
 }
 
 .carousel-btn:hover {
